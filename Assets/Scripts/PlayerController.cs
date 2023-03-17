@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 10f;
     Vector3 playerVelocity;
 
+    private bool isControllable = true;
 
 
     // Start is called before the first frame update
