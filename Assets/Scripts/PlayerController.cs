@@ -20,12 +20,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerVelocity = new Vector3(0, 0, Input.GetAxis("Vertical"));
-        playerVelocity = transform.TransformDirection(playerVelocity);
-
         transform.Rotate(0, Input.GetAxis("Mouse X") * rotateSpeed, 0);
 
-        //controller.transform.Rotate(rotateDirection, rotateSpeed * Time.deltaTime);
+        playerVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        playerVelocity = transform.TransformDirection(playerVelocity);
+
+
         CollisionFlags flags = controller.Move(playerVelocity * Time.deltaTime * moveSpeed);
+        
     }
 }
