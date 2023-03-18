@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIController : MonoBehaviour
+public class TheGame : MonoBehaviour
 {
+    bool gameStarted = true;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +16,10 @@ public class AIController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public bool isGameStarted ()
+    {
+        return gameStarted;
     }
 }
