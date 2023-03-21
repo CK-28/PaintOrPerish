@@ -1,17 +1,17 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerStatus : MonoBehaviour
+public class AIStatus : MonoBehaviour
 {
 	public static float maxHealth = 1.0f;
 	private float health = maxHealth;
 
 	private bool dead = false;
-	private CharacterController player;
+	private AIController aiController;
 
 	void Start()
 	{
-		player = GetComponent<CharacterController>();
+		aiController = GetComponent<AIController>();
 	}
 
 	public bool isAlive()
@@ -25,7 +25,7 @@ public class PlayerStatus : MonoBehaviour
 	}
 
 	public void onStart()
-	{
+    {
 		dead = false;
-	}
+    }
 }

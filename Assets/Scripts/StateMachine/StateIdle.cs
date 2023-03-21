@@ -13,11 +13,11 @@ public class StateIdle : State
 		if (gameScript.isGameStarted())
 		{
 			Debug.Log("Game is started. Going from Idle to playing objective");
-			//character.ChangeState(new StateObjective());
+			character.ChangeState(new StateObjective());
 		}
 		else
 		{
-			//character.BeIdle();
+			character.BeIdle();
 		}
 	}
 }
