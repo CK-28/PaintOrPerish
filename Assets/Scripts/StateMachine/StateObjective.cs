@@ -9,7 +9,7 @@ public class StateObjective : State
 		if (character.IsDead)											//If shot, die
 		{
 			Debug.Log("Going from PlayingObjective to Dead");
-			//character.ChangeState(new StateShoot());
+			character.ChangeState(new StateDie());
 		}
 		else if (character.EnemySeen() && character.EnemyInRange())     //If see and in range, attack
 		{
@@ -19,7 +19,7 @@ public class StateObjective : State
 		else if (character.EnemySeen() && !character.EnemyInRange())	//If see and out of range, approach
 		{
 			Debug.Log("Going from PlayingObjective to Approaching");
-			//character.ChangeState(new StateDie());
+			character.ChangeState(new StateShoot());
 		}
 		else
 		{

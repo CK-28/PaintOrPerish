@@ -120,20 +120,26 @@ public class AIController : MonoBehaviour
     public void BeIdle()
     {
         //animation.CrossFade("idle", 0.2f);
-        Debug.Log("Homie in idle");
+       // Debug.Log("Homie in idle");
         moveDirection = new Vector3(0, 0, 0);
 
     }
 
     public void BeApproaching()
     {
+        GameObject player = GameObject.Find("Player");
+        Vector3 playerPos = player.transform.position;
+        Vector3 u = (playerPos - transform.position).normalized;
 
+        movementSpeed = 5;
+        moveDirection = u;
     }
 
     public void BeShooting()
     {
         //animation.CrossFade("shoot", 0.2f);
         Debug.Log("Homie is shooting");
+        movementSpeed = 0;
         gun = transform.GetChild(0).gameObject;
         
 
@@ -150,9 +156,36 @@ public class AIController : MonoBehaviour
         return;
     }
 
+    public void goToSpawn()
+    {
+        GameObject spawn = GameObject.Find("Spawn Point");
+        Vector3 spawnLocation = spawn.transform.position;
+        Vector3 u = (spawnLocation - transform.position).normalized;
+        if(!((transform.position - spawnLocation).magnitude <= 5)) // character is not at spawn
+        {
+            // TODO: add better pathfinding/collision avoidance with rayasting
+            movementSpeed = 5;
+            moveDirection = u;
+        } else
+        {
+            isDead = false;
+        }
+    }
+
     public void ChangeState(State newState)
     {
         currentState = newState;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Hit!");
+        if(collision.gameObject.tag == "paintball") //collision is paintball
+        {
+            Debug.Log("Dead!");
+            // set dead
+            isDead = true;
+        }
     }
 
     // Use this for initialization
@@ -186,5 +219,6 @@ public class AIController : MonoBehaviour
         {
             controller.Move(moveDirection * Time.deltaTime * movementSpeed);
         }*/
+        controller.Move(moveDirection * Time.deltaTime * movementSpeed);
     }
 }

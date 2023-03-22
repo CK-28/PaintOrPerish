@@ -8,8 +8,8 @@ public class StateShoot : State
 	{
 		if (character.IsDead)												//If shot, die
 		{
-			Debug.Log("Going from PlayingObjective to Dying");
-			//character.ChangeState(new StateDie());
+			Debug.Log("Going from shooting to dead");
+			character.ChangeState(new StateDie());
 		}
 		else if(character.EnemySeen() && !character.EnemyInRange())			//If see and out of range, approach
 		{

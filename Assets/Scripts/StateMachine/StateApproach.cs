@@ -9,7 +9,7 @@ public class StateApproach : State
 		if (character.IsDead)											//If shot, die
 		{
 			Debug.Log("Going from PlayingObjective to Dying");
-			//character.ChangeState(new StateDie());
+			character.ChangeState(new StateDie());
 		}
 		else if (character.EnemySeen() && character.EnemyInRange())      //If see and in range, attack
 		{
@@ -19,11 +19,11 @@ public class StateApproach : State
 		else if (!character.EnemySeen())								//If lost sight of enemy, go back to objective
 		{
 			Debug.Log("Going from Approaching to PlayingObjective");
-			//character.ChangeState(new StateObjective());
+			character.ChangeState(new StateObjective());
 		}
 		else
 		{
-			//character.BeApproaching();
+			character.BeApproaching();
 		}
 	}
 }
