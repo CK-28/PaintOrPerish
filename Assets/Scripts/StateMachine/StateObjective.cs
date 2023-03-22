@@ -6,15 +6,20 @@ public class StateObjective : State
 {
 	public override void Execute(AIController character)
 	{
-		if (true)//character.EnemySeen()
+		if (character.IsDead)											//If shot, die
 		{
-			Debug.Log("Going from PlayingObjective to Shooting");
-			//character.ChangeState(new StateShoot());
+			Debug.Log("Going from PlayingObjective to Dead");
+			character.ChangeState(new StateDie());
 		}
-		else if (false)//gotted shotted
-        {
-			Debug.Log("Going from PlayingObjective to Dying");
-			//character.ChangeState(new StateDie());
+		else if (character.EnemySeen() && character.EnemyInRange())     //If see and in range, attack
+		{
+			Debug.Log("Going from PlayingObjective to Attacking");
+			character.ChangeState(new StateShoot());
+		}
+		else if (character.EnemySeen() && !character.EnemyInRange())	//If see and out of range, approach
+		{
+			Debug.Log("Going from PlayingObjective to Approaching");
+			character.ChangeState(new StateShoot());
 		}
 		else
 		{

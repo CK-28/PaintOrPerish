@@ -6,14 +6,14 @@ public class StateDie : State
 {
 	public override void Execute(AIController character)
 	{
-		if (true)//arrived at spawn
+		if (!character.IsDead)	//arrived at spawn
 		{
-			Debug.Log("Going from Dead to spawn and then actually Objective");
-			//character.ChangeState(new StateObjective());
+			Debug.Log("Respawned. Playing Objective");
+			character.ChangeState(new StateObjective());
 		}
 		else
 		{
-			//character.goToSpawn();
+			character.goToSpawn();
 		}
 	}
 }
