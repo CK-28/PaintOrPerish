@@ -15,7 +15,8 @@ public class AIController : MonoBehaviour
 
     private Vector3 moveDirection = new Vector3(0, 0, 0);
     private float movementSpeed = 2.5f;
-    private float gravity = 50.0f;
+    private float gravity = -9.81f;
+    private float yVelocity = 0;
 
     private Transform target;
 
@@ -133,6 +134,8 @@ public class AIController : MonoBehaviour
 
         movementSpeed = 5;
         moveDirection = u;
+
+        transform.LookAt(playerPos);
     }
 
     public void BeShooting()
@@ -213,7 +216,11 @@ public class AIController : MonoBehaviour
         }
 
         currentState.Execute(this);
-        //moveDirection.y -= gravity * Time.deltaTime;
+        //transform.LookAt(new Vector3(moveDirection.x, 0, moveDirection.z));
+
+        yVelocity += gravity * Time.deltaTime;
+
+        moveDirection.y = yVelocity;
 
         /*if (!isDead)
         {
