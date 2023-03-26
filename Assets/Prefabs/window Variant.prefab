@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: ef80924278f76d544be260491277cd2e, type: 2}
     - target: {fileID: 919132149155446097, guid: f2c9e8901b7075d4ba31b88a365a537e, type: 3}
       propertyPath: m_Name
-      value: window
+      value: window Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2c9e8901b7075d4ba31b88a365a537e, type: 3}
@@ -66,6 +66,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f2c9e8901b7075d4ba31b88a365a537e, type: 3}
   m_PrefabInstance: {fileID: 7536905255166235054}
   m_PrefabAsset: {fileID: 0}
+--- !u!64 &5005222117912039390
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7230844436571778303}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2432090755550338912, guid: f2c9e8901b7075d4ba31b88a365a537e, type: 3}
 --- !u!23 &3961034097395920650
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -86,7 +100,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6629797300637803691, guid: f2c9e8901b7075d4ba31b88a365a537e, type: 3}
+  - {fileID: 2100000, guid: ef80924278f76d544be260491277cd2e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,17 +122,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5005222117912039390
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7230844436571778303}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2432090755550338912, guid: f2c9e8901b7075d4ba31b88a365a537e, type: 3}
