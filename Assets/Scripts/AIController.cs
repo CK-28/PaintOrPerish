@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public class AIController : MonoBehaviour
 {
@@ -26,6 +28,9 @@ public class AIController : MonoBehaviour
     public float sightDistance = 20.0f;
     public float attackDistance = 5.0f;
     public float attackCooldown = 1.0f;
+
+    private NavMeshAgent navMeshAgent;
+    //public Transform movePositionTransform;
 
     // Checking if character is dead
     public bool IsDead
@@ -163,16 +168,18 @@ public class AIController : MonoBehaviour
     {
         GameObject spawn = GameObject.Find("Spawn Point");
         Vector3 spawnLocation = spawn.transform.position;
-        Vector3 u = (spawnLocation - transform.position).normalized;
-        if(!((transform.position - spawnLocation).magnitude <= 5)) // character is not at spawn
+        /*Vector3 u = (spawnLocation - transform.position).normalized;
+        if (!((transform.position - spawnLocation).magnitude <= 5)) // character is not at spawn
         {
             // TODO: add better pathfinding/collision avoidance with rayasting
             movementSpeed = 5;
             moveDirection = u;
-        } else
+        }
+        else
         {
             isDead = false;
-        }
+        }*/
+        navMeshAgent.destination = spawnLocation;
     }
 
     public void ChangeState(State newState)
@@ -196,12 +203,13 @@ public class AIController : MonoBehaviour
     {
 
         controller = GetComponent<CharacterController>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
         //animation = GetComponent<Animation>();
         //GameObject tmp = GameObject.FindWithTag("Player");
         //if (tmp != null)
         //{
-            //target = tmp.transform;
-            //playerStatus = tmp.GetComponent<PlayerStatus>();
+        //target = tmp.transform;
+        //playerStatus = tmp.GetComponent<PlayerStatus>();
         //}
 
         ChangeState(new StateIdle());
