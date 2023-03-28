@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - paintball
+  - DefenseA
+  - DefenseB
+  - TDMDefense
   layers:
   - Default
   - TransparentFX

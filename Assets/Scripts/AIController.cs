@@ -32,6 +32,8 @@ public class AIController : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     //public Transform movePositionTransform;
 
+    private TDMDefend defendObjective;
+
     // Checking if character is dead
     public bool IsDead
     {
@@ -164,22 +166,36 @@ public class AIController : MonoBehaviour
         return;
     }
 
+    public void BeObjective()
+    {
+        // get point
+        Transform location = defendObjective.getLocation();
+        Vector3 position = defendObjective.getPosition();
+        // go there
+        navMeshAgent.destination = position;
+        // hang out
+        if(Vector3.Distance(position, transform.position) < 1)
+        {
+            Quaternion rotation = Quaternion.LookRotation(location.forward, Vector3.up);
+            transform.rotation = rotation;
+        }
+        // move
+    }
+
     public void goToSpawn()
     {
         GameObject spawn = GameObject.Find("Spawn Point");
         Vector3 spawnLocation = spawn.transform.position;
-        /*Vector3 u = (spawnLocation - transform.position).normalized;
         if (!((transform.position - spawnLocation).magnitude <= 5)) // character is not at spawn
         {
             // TODO: add better pathfinding/collision avoidance with rayasting
-            movementSpeed = 5;
-            moveDirection = u;
+            navMeshAgent.destination = spawnLocation;
         }
         else
         {
             isDead = false;
-        }*/
-        navMeshAgent.destination = spawnLocation;
+            defendObjective.generateLocation();
+        }
     }
 
     public void ChangeState(State newState)
@@ -204,6 +220,7 @@ public class AIController : MonoBehaviour
 
         controller = GetComponent<CharacterController>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        defendObjective = GetComponent<TDMDefend>();
         //animation = GetComponent<Animation>();
         //GameObject tmp = GameObject.FindWithTag("Player");
         //if (tmp != null)

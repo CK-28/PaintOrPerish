@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class TDMDefend : MonoBehaviour
 {
-    // Start is called before the first frame update
+    GameObject[] defensePoints;
+    GameObject location;
+    Vector3 position;
+    // Start is called before he first frame update
     void Start()
     {
-        
+        defensePoints = GameObject.FindGameObjectsWithTag("TDMDefense");
+        Debug.Log("There are " + defensePoints.Length + " defense points in the map");        
+
+        generateLocation();
     }
 
-    // Update is called once per frame
-    void Update()
+    // Get location to go to
+    public void generateLocation()
     {
-        
+        // generate random point
+        int index = Random.Range(0, defensePoints.Length);
+        location = defensePoints[index];
+        position = location.transform.position;
+    }
+
+    public Transform getLocation()
+    {
+        return location.transform;
+    }
+
+    public Vector3 getPosition()
+    {
+        return location.transform.position;
     }
 }
