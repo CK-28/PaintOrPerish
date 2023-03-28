@@ -121,7 +121,7 @@ public class AIController : MonoBehaviour
     public void BeIdle()
     {
         //animation.CrossFade("idle", 0.2f);
-       // Debug.Log("Homie in idle");
+        // Debug.Log("Homie in idle");
         moveDirection = new Vector3(0, 0, 0);
 
     }
@@ -218,14 +218,14 @@ public class AIController : MonoBehaviour
         currentState.Execute(this);
         //transform.LookAt(new Vector3(moveDirection.x, 0, moveDirection.z));
 
-        yVelocity += gravity * Time.deltaTime;
+       /* yVelocity += gravity * Time.deltaTime;
 
         moveDirection.y = yVelocity;
 
-        /*if (!isDead)
+        *//*if (!isDead)
         {
             controller.Move(moveDirection * Time.deltaTime * movementSpeed);
-        }*/
-        controller.Move(moveDirection * Time.deltaTime * movementSpeed);
+        }*//*
+        controller.Move(moveDirection * Time.deltaTime * movementSpeed);*/
     }
 }
