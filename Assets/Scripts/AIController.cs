@@ -69,14 +69,14 @@ public class AIController : MonoBehaviour
     // Checking if enemy is within FOV (180 degrees)
     public bool EnemySeen()
     {
-        GameObject player = GameObject.Find("Player");
+        GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
 
         float angleToTurn = 0;
         Vector3 playerPos = new Vector3(0, 0, 0);
 
         if (player)
         {
-            PlayerStatus playerStatus = player.GetComponent(typeof(PlayerStatus)) as PlayerStatus;
+            PlayerStatus playerStatus = player.GetComponent<PlayerStatus>();//(typeof(PlayerStatus)) as PlayerStatus;
             playerPos = player.transform.position;
 
             // A1 Goalie Logic to find angle between NPC facing direction and player
@@ -87,7 +87,7 @@ public class AIController : MonoBehaviour
             float diff = diffInPosition();
 
             // Checking angle in both directions, distance, and if player is alive
-            if (angleToTurn <= (fieldOfView / 2) && angleToTurn >= (fieldOfView / -2) && diff <= sightDistance && (playerStatus.isAlive()))
+            if (angleToTurn <= (fieldOfView / 2) && angleToTurn >= (fieldOfView / -2) && diff <= sightDistance /*&& (playerStatus.isAlive())*/)
             {
                 return true;
             }
@@ -150,7 +150,7 @@ public class AIController : MonoBehaviour
         //animation.CrossFade("shoot", 0.2f);
         Debug.Log("Homie is shooting");
         movementSpeed = 0;
-        gun = transform.GetChild(0).gameObject;
+        gun = transform.GetChild(2).gameObject;
         
 
         if (attackCooldown <= 0)
@@ -168,18 +168,25 @@ public class AIController : MonoBehaviour
 
     public void BeObjective()
     {
-        // get point
-        Transform location = defendObjective.getLocation();
-        Vector3 position = defendObjective.getPosition();
-        // go there
-        navMeshAgent.destination = position;
-        // hang out
-        if(Vector3.Distance(position, transform.position) < 1)
+        if(this.tag == "TDMDefense")
         {
-            Quaternion rotation = Quaternion.LookRotation(location.forward, Vector3.up);
-            transform.rotation = rotation;
+            // get point
+            Transform location = defendObjective.getLocation();
+            Vector3 position = defendObjective.getPosition();
+            // go there
+            navMeshAgent.destination = position;
+            // hang out
+            if (Vector3.Distance(position, transform.position) < 1)
+            {
+                Quaternion rotation = Quaternion.LookRotation(location.forward, Vector3.up);
+                transform.rotation = rotation;
+            }
+            // move
+        } else if(this.tag == "TDMRoam")
+        {
+            Debug.Log("roam");
         }
-        // move
+
     }
 
     public void goToSpawn()
