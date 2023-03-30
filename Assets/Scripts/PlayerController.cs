@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
     Vector3 playerVelocity;
     float yVelocity = 0;
 
-    private float gravity = -9.81f;
-    private float jumpHeight = 0.5f;
+    private float gravity = -8f;
+    private float jumpHeight = 0.25f;
 
 
     private bool isControllable = true;
@@ -35,10 +35,17 @@ public class PlayerController : MonoBehaviour
         playerVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         playerVelocity = transform.TransformDirection(playerVelocity);
 
+        // Jumping functionality
         if (controller.isGrounded && Input.GetButtonDown("Jump"))
         {
             Debug.Log("Jump");
             yVelocity = Mathf.Sqrt(jumpHeight * -2f * (gravity));
+        }
+
+        // Crouching functionality
+        if (controller.isGrounded && Input.GetButtonDown("Crouch"))
+        {
+            Debug.Log("Crouch");
         }
 
         if (Vector3.Distance(playerVelocity, new Vector3 (0, 0, 0)) > 1)
