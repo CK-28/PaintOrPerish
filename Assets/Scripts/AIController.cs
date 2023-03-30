@@ -186,9 +186,9 @@ public class AIController : MonoBehaviour
                 transform.rotation = rotation;
             }
             // move
-        } else if(this.tag == "TDMRoam")
+        }
+        else if(this.tag == "TDMRoam")
         {
-            Debug.Log("roam");
             Vector3 position = roamObjective.getPosition();
             navMeshAgent.destination = position;
             if (Vector3.Distance(position, transform.position) < 1)

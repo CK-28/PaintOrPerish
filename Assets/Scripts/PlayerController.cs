@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     Vector3 playerVelocity;
     float yVelocity = 0;
 
-    private float gravity = -8f;
+    private float gravity = -2f;
     private float jumpHeight = 0.25f;
 
 
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         if (controller.isGrounded && Input.GetButtonDown("Jump"))
         {
             Debug.Log("Jump");
-            yVelocity = Mathf.Sqrt(jumpHeight * -2f * (gravity));
+            yVelocity = Mathf.Sqrt(jumpHeight * -1f * (gravity));
         }
 
         // Crouching functionality
