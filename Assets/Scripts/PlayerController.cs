@@ -17,11 +17,14 @@ public class PlayerController : MonoBehaviour
 
     private bool isControllable = true;
 
+    private new Animation animation;
+
 
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        animation = GetComponent<Animation>();
     }
 
     // Update is called once per frame
@@ -36,6 +39,11 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Jump");
             yVelocity = Mathf.Sqrt(jumpHeight * -2f * (gravity));
+        }
+
+        if (Vector3.Distance(playerVelocity, new Vector3 (0, 0, 0)) > 1)
+        {
+            animation.CrossFade("Running", 0.1f);
         }
 
         yVelocity += gravity * Time.deltaTime;
