@@ -42,16 +42,22 @@ public class PlayerController : MonoBehaviour
             yVelocity = Mathf.Sqrt(jumpHeight * -1f * (gravity));
         }
 
-        // Crouching functionality
+        /*// Crouching
         if (controller.isGrounded && Input.GetButtonDown("Crouch"))
         {
             Debug.Log("Crouch");
+            animation.CrossFade("Crouching", 0.1f);
         }
 
-        if (Vector3.Distance(playerVelocity, new Vector3 (0, 0, 0)) > 1)
+        // Walking
+        if (Vector3.Distance(playerVelocity, new Vector3 (0, 0, 0)) > 0)
         {
-            animation.CrossFade("Running", 0.1f);
+            animation.CrossFade("Walking", 0.1f);
         }
+        else
+        {
+            //animation.CrossFade("FullIdle", 0.1f);
+        }*/
 
         yVelocity += gravity * Time.deltaTime;
 
