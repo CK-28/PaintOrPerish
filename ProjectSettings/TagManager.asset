@@ -9,6 +9,10 @@ TagManager:
   - DefenseA
   - DefenseB
   - TDMDefense
+  - TDMRoute1
+  - TDMRoute2
+  - TDMRoute3
+  - TDMRoam
   layers:
   - Default
   - TransparentFX

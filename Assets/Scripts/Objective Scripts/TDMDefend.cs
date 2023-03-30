@@ -25,11 +25,13 @@ public class TDMDefend : MonoBehaviour
         position = location.transform.position;
     }
 
+    // Return transform of defense point
     public Transform getLocation()
     {
         return location.transform;
     }
 
+    // Return vector position of defense point
     public Vector3 getPosition()
     {
         return location.transform.position;
