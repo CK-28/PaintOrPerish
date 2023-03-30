@@ -43,5 +43,9 @@ public class TDMRoam : MonoBehaviour
     public void getNextLocation()
     {
         currentTarget++;
+        if (currentTarget >= currentRoute.Length)
+        {
+            currentTarget = 0;
+        }
     }
 }

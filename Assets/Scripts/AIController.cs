@@ -34,6 +34,10 @@ public class AIController : MonoBehaviour
 
     private TDMDefend defendObjective;
 
+
+    private TDMRoam roamObjective;
+    private float roamCooldown = 5.0f;
+
     // Checking if character is dead
     public bool IsDead
     {
@@ -185,6 +189,20 @@ public class AIController : MonoBehaviour
         } else if(this.tag == "TDMRoam")
         {
             Debug.Log("roam");
+            Vector3 position = roamObjective.getPosition();
+            navMeshAgent.destination = position;
+            if (Vector3.Distance(position, transform.position) < 1)
+            {
+                if (roamCooldown <= 0)
+                {
+                    roamObjective.getNextLocation();
+                    roamCooldown = 1.0f;
+                }
+                else
+                {
+                    roamCooldown = roamCooldown - Time.deltaTime;
+                }
+            } 
         }
 
     }
@@ -202,6 +220,7 @@ public class AIController : MonoBehaviour
         {
             isDead = false;
             defendObjective.generateLocation();
+            roamObjective.chooseRoute();
         }
     }
 
@@ -228,6 +247,7 @@ public class AIController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         defendObjective = GetComponent<TDMDefend>();
+        roamObjective = GetComponent<TDMRoam>();
         //animation = GetComponent<Animation>();
         //GameObject tmp = GameObject.FindWithTag("Player");
         //if (tmp != null)
