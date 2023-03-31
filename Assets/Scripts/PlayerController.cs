@@ -42,22 +42,15 @@ public class PlayerController : MonoBehaviour
             yVelocity = Mathf.Sqrt(jumpHeight * -1f * (gravity));
         }
 
-        /*// Crouching
-        if (controller.isGrounded && Input.GetButtonDown("Crouch"))
+        // Running speed
+        if (Input.GetButtonDown("Run"))
         {
-            Debug.Log("Crouch");
-            animation.CrossFade("Crouching", 0.1f);
+            moveSpeed = 20f;
         }
-
-        // Walking
-        if (Vector3.Distance(playerVelocity, new Vector3 (0, 0, 0)) > 0)
+        if (Input.GetButtonUp("Run"))
         {
-            animation.CrossFade("Walking", 0.1f);
+            moveSpeed = 10f;
         }
-        else
-        {
-            //animation.CrossFade("FullIdle", 0.1f);
-        }*/
 
         yVelocity += gravity * Time.deltaTime;
 
