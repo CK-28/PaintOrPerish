@@ -23,7 +23,7 @@ public class StateObjective : State
 		}
 		else
 		{
-			//character.BeObjective();
+			character.BeObjective();
 		}
 	}
 }

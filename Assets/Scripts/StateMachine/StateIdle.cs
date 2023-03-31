@@ -6,6 +6,7 @@ public class StateIdle : State
 {
     public override void Execute(AIController character)
     {
+		Debug.Log("Pickles");
 		var gameObject = GameObject.Find("TheGame");
 		TheGame gameScript = gameObject.GetComponent<TheGame>();
 

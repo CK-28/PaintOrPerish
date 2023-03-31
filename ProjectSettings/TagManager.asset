@@ -6,6 +6,17 @@ TagManager:
   tags:
   - Enemy
   - paintball
+  - DefenseA
+  - DefenseB
+  - TDMDefense
+  - TDMRoute1
+  - TDMRoute2
+  - TDMRoute3
+  - TDMRoam
+  - paintballRed
+  - paintballBlue
+  - BlueTeam
+  - RedTeam
   layers:
   - Default
   - TransparentFX
