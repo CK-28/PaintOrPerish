@@ -52,6 +52,16 @@ public class PlayerController : MonoBehaviour
             moveSpeed = 10f;
         }
 
+        // Crouch speed
+        if (Input.GetButtonDown("Crouch"))
+        {
+            moveSpeed = 5f;
+        }
+        if (Input.GetButtonUp("Crouch"))
+        {
+            moveSpeed = 10f;
+        }
+
         yVelocity += gravity * Time.deltaTime;
 
         playerVelocity.y = yVelocity;

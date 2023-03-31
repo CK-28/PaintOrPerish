@@ -25,16 +25,24 @@ public class AnimationController : MonoBehaviour
             mAnimator.ResetTrigger("TriRun");
             mAnimator.ResetTrigger("TriIdle");
 
-            if ((!Input.GetButton("Crouch")) && playerController.moveSpeed == 10f && (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Vertical") > 0))
+            if (playerController.moveSpeed == 10f && (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Vertical") > 0))
             {
                 mAnimator.SetTrigger("TriWalk");
+            }
+            else if (playerController.moveSpeed == 5f && (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Vertical") > 0))
+            {
                 mAnimator.SetTrigger("TriCrouchWalk");
             }
-            else if ((!Input.GetButton("Crouch")) && playerController.moveSpeed == 20f && (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Vertical") > 0))
+            else if (playerController.moveSpeed == 20f && (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Vertical") > 0))
             {
                 mAnimator.SetTrigger("TriRun");
             }
-            else if (Input.GetButtonDown("Crouch"))
+            else
+            {
+                mAnimator.SetTrigger("TriIdle");
+            }
+            
+            if (Input.GetButtonDown("Crouch"))
             {
                 mAnimator.SetTrigger("TriCrouch");
             }
@@ -42,11 +50,7 @@ public class AnimationController : MonoBehaviour
             {
                 mAnimator.SetTrigger("TriCrouchUp");
             }
-            else
-            {
-                mAnimator.SetTrigger("TriIdle");
-            }
-            
+
         }
     }
 }
