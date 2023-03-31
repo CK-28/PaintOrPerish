@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 6630798594591314790}
   - component: {fileID: -3867584644062099433}
   m_Layer: 0
-  m_Name: paintball
-  m_TagString: paintball
+  m_Name: paintballBlue
+  m_TagString: paintballRed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 01bf734550568fe44bbc5f1cc4c03653, type: 3}
+  - {fileID: 2100000, guid: 6a230e086db60c5459d4f4539ac68964, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

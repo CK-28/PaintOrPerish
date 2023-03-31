@@ -4,14 +4,13 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class AIController : MonoBehaviour
+public class EnemyAIController : AIController
 {
     private CharacterController controller;
-    private State currentState;
+    //private State currentState;
     private new Animation animation;
 
     private bool isControllable = true;
-    private bool isDead = false;
 
     //private PlayerStatus playerStatus;
 
@@ -30,22 +29,13 @@ public class AIController : MonoBehaviour
     public float attackCooldown = 1.0f;
 
     private NavMeshAgent navMeshAgent;
-    //public Transform movePositionTransform;
 
     private TDMDefend defendObjective;
-
-
     private TDMRoam roamObjective;
     private float roamCooldown = 5.0f;
 
-    // Checking if character is dead
-    public bool IsDead
-    {
-        get { return isDead; }
-        set { isDead = value; }
-    }
-
     // Checking if enemy is within range of attack
+    override
     public bool EnemyInRange()
     {
         GameObject player = GameObject.Find("Player");
@@ -71,6 +61,7 @@ public class AIController : MonoBehaviour
     }
 
     // Checking if enemy is within FOV (180 degrees)
+    override
     public bool EnemySeen()
     {
         GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
@@ -84,7 +75,7 @@ public class AIController : MonoBehaviour
             playerPos = player.transform.position;
 
             // A1 Goalie Logic to find angle between NPC facing direction and player
-            Vector3 relativePos = transform.InverseTransformPoint(playerPos);
+            Vector3 relativePos = controller.transform.InverseTransformPoint(playerPos);
             angleToTurn = Mathf.Atan2(relativePos.x, relativePos.z) * Mathf.Rad2Deg;
 
             // Finding distance between NPC and player
@@ -119,7 +110,7 @@ public class AIController : MonoBehaviour
             playerPos = player.transform.position;
 
             // Grab NPC position
-            Vector3 AIPos = transform.position;
+            Vector3 AIPos = controller.transform.position;
 
             // Find the difference between positions
             Vector3 u = AIPos - playerPos;
@@ -129,6 +120,7 @@ public class AIController : MonoBehaviour
         return diff;
     }
 
+    override
     public void BeIdle()
     {
         //animation.CrossFade("idle", 0.2f);
@@ -137,24 +129,26 @@ public class AIController : MonoBehaviour
 
     }
 
+    override
     public void BeApproaching()
     {
         GameObject player = GameObject.Find("Player");
         Vector3 playerPos = player.transform.position;
-        Vector3 u = (playerPos - transform.position).normalized;
+        Vector3 u = (playerPos - controller.transform.position).normalized;
 
         movementSpeed = 5;
         moveDirection = u;
 
-        transform.LookAt(playerPos);
+        controller.transform.LookAt(playerPos);
     }
 
+    override
     public void BeShooting()
     {
         //animation.CrossFade("shoot", 0.2f);
         Debug.Log("Homie is shooting");
         movementSpeed = 0;
-        gun = transform.GetChild(2).gameObject;
+        gun = controller.transform.GetChild(2).gameObject;
         
 
         if (attackCooldown <= 0)
@@ -170,9 +164,10 @@ public class AIController : MonoBehaviour
         return;
     }
 
+    override
     public void BeObjective()
     {
-        if(this.tag == "TDMDefense")
+        if (myRole == Role.Defend)
         {
             // get point
             Transform location = defendObjective.getLocation();
@@ -180,18 +175,18 @@ public class AIController : MonoBehaviour
             // go there
             navMeshAgent.destination = position;
             // hang out
-            if (Vector3.Distance(position, transform.position) < 1)
+            if (Vector3.Distance(position, controller.transform.position) < 1)
             {
                 Quaternion rotation = Quaternion.LookRotation(location.forward, Vector3.up);
-                transform.rotation = rotation;
+                controller.transform.rotation = rotation;
             }
             // move
         }
-        else if(this.tag == "TDMRoam")
+        else if(myRole == Role.Roam)
         {
             Vector3 position = roamObjective.getPosition();
             navMeshAgent.destination = position;
-            if (Vector3.Distance(position, transform.position) < 1)
+            if (Vector3.Distance(position, controller.transform.position) < 1)
             {
                 if (roamCooldown <= 0)
                 {
@@ -207,11 +202,12 @@ public class AIController : MonoBehaviour
 
     }
 
+    override
     public void goToSpawn()
     {
         GameObject spawn = GameObject.Find("Spawn Point");
         Vector3 spawnLocation = spawn.transform.position;
-        if (!((transform.position - spawnLocation).magnitude <= 5)) // character is not at spawn
+        if (!((controller.transform.position - spawnLocation).magnitude <= 5)) // character is not at spawn
         {
             // TODO: add better pathfinding/collision avoidance with rayasting
             navMeshAgent.destination = spawnLocation;
@@ -224,15 +220,10 @@ public class AIController : MonoBehaviour
         }
     }
 
-    public void ChangeState(State newState)
-    {
-        currentState = newState;
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Hit!");
-        if(collision.gameObject.tag == "paintball") //collision is paintball
+        if(collision.gameObject.tag == "paintballRed") //collision is enemy paintball
         {
             Debug.Log("Dead!");
             // set dead
@@ -267,17 +258,20 @@ public class AIController : MonoBehaviour
             return;
         }
 
-        currentState.Execute(this);
+        if(currentState != null)
+        {
+            currentState.Execute(this);
+        }
         //transform.LookAt(new Vector3(moveDirection.x, 0, moveDirection.z));
 
-       /* yVelocity += gravity * Time.deltaTime;
+        /* yVelocity += gravity * Time.deltaTime;
 
-        moveDirection.y = yVelocity;
+         moveDirection.y = yVelocity;
 
-        *//*if (!isDead)
-        {
-            controller.Move(moveDirection * Time.deltaTime * movementSpeed);
-        }*//*
-        controller.Move(moveDirection * Time.deltaTime * movementSpeed);*/
+         *//*if (!isDead)
+         {
+             controller.Move(moveDirection * Time.deltaTime * movementSpeed);
+         }*//*
+         controller.Move(moveDirection * Time.deltaTime * movementSpeed);*/
     }
 }
