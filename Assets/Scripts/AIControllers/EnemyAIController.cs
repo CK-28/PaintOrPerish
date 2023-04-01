@@ -91,7 +91,7 @@ public class EnemyAIController : AIController
 
         if(targetIndex >= 0)
         {
-            target = enemies[FindNearestEnemy()].transform;
+            target = enemies[targetIndex].transform;
             if (vis.EnemySeen(target) != new Vector3(0, 0, 0))
             {
                 Debug.Log("Enemy Seen!");

@@ -27,15 +27,15 @@ public class AnimationController : MonoBehaviour
             //mAnimator.ResetTrigger("Tri");
 
 
-            if (playerController.moveSpeed == 10f && (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Vertical") > 0))
+            if (playerController.moveSpeed == 10f && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
             {
                 mAnimator.SetTrigger("TriWalk");
             }
-            else if (playerController.moveSpeed == 5f && (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Vertical") > 0))
+            else if (playerController.moveSpeed == 5f && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
             {
                 mAnimator.SetTrigger("TriCrouchWalk");
             }
-            else if (playerController.moveSpeed == 20f && (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Vertical") > 0))
+            else if (playerController.moveSpeed == 20f && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
             {
                 mAnimator.SetTrigger("TriRun");
             }

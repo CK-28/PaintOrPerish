@@ -55,7 +55,7 @@ public class FriendlyAIController : AIController
     override
     public bool EnemySeen()
     {
-        GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
+        GameObject player = GameObject.FindGameObjectsWithTag("RedTeam")[0];
 
         float angleToTurn = 0;
         Vector3 playerPos = new Vector3(0, 0, 0);

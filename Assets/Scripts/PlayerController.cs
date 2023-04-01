@@ -76,7 +76,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Hit!");
         if (collision.gameObject.tag == "paintballBlue") //collision is enemy paintball
         {
             Debug.Log("Dead!");

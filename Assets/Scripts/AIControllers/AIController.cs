@@ -55,12 +55,13 @@ public abstract class AIController : MonoBehaviour
             {
                 if (enemyController.IsDead)
                     continue;
-            } /*else if (playerController = enemies[i].GetComponent<PlayerController>())
+            }
+            if (playerController = enemies[i].GetComponent<PlayerController>())
             {
                 if (playerController.IsDead)
                     continue;
-            }*/
-            
+            }
+
             target = enemies[i].transform;
             Vector3 toPlayer = target.position - transform.position;
 
