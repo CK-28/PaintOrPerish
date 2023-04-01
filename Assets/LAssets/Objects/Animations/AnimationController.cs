@@ -24,6 +24,8 @@ public class AnimationController : MonoBehaviour
             mAnimator.ResetTrigger("TriCrouchWalk");
             mAnimator.ResetTrigger("TriRun");
             mAnimator.ResetTrigger("TriIdle");
+            //mAnimator.ResetTrigger("Tri");
+
 
             if (playerController.moveSpeed == 10f && (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Vertical") > 0))
             {
@@ -50,6 +52,11 @@ public class AnimationController : MonoBehaviour
             {
                 mAnimator.SetTrigger("TriCrouchUp");
             }
+
+            /*if (playerController.IsDead)
+            {
+                mAnimator.SetTrigger("TriDead");
+            }*/
 
         }
     }
