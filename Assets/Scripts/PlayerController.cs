@@ -68,6 +68,5 @@ public class PlayerController : MonoBehaviour
 
 
         CollisionFlags flags = controller.Move(playerVelocity * Time.deltaTime * moveSpeed);
-        
     }
 }

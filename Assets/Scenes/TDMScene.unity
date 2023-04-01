@@ -16885,6 +16885,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 170a67e47e21568479e5263ce4000c23, type: 3}
+--- !u!1 &1224563721 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1638324074429854569, guid: f678c808165784f4488a5294d4822e5f, type: 3}
+  m_PrefabInstance: {fileID: 1908706837186335643}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1224563728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224563721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50868e1e2f9e024479feae05caaf8c97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sightDistance: 20
+  visionAngle: 180
+  rayArrHor: 5
+  rayArrVert: 5
+  rayCastAngle: 60
+  enemyTag: Red
 --- !u!1001 &1226305325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28822,7 +28845,7 @@ GameObject:
   - component: {fileID: 2058129857}
   m_Layer: 0
   m_Name: FriendlyAI
-  m_TagString: TDMDefense
+  m_TagString: RedTeam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28947,6 +28970,7 @@ MonoBehaviour:
   sightDistance: 20
   attackDistance: 5
   attackCooldown: 1
+  navMeshAgent: {fileID: 0}
 --- !u!136 &2058129856
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -30074,7 +30098,7 @@ GameObject:
   - component: {fileID: 919132149059235423}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player
+  m_TagString: RedTeam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

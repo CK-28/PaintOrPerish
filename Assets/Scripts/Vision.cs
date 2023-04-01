@@ -5,7 +5,7 @@ using UnityEngine;
 public class Vision : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Transform target;
+    //public Transform target;
     public float sightDistance = 20.0f;
     public float visionAngle = 180.0f;
     public int rayArrHor = 5;
@@ -34,12 +34,12 @@ public class Vision : MonoBehaviour
         return angle;
     }
 
-    public Vector3 EnemySeen()
+    public Vector3 EnemySeen(Transform target)
     {
         Vector3 toReturn = new Vector3(0.0f, 0.0f, 0.0f);
         if (getAngle(target.position) < visionAngle/2.0f && getAngle(target.position) > visionAngle/-2.0f)
         {
-            Vector3 temp = RayArrayHit(rayArrHor, rayArrVert, rayCastAngle);
+            Vector3 temp = RayArrayHit(rayArrHor, rayArrVert, rayCastAngle, target);
             if(toReturn == temp)
             {
                 return toReturn;
@@ -52,7 +52,7 @@ public class Vision : MonoBehaviour
         return toReturn;
     }
 
-    public Vector3 RayArrayHit(int arrHorCount, int arrVertCount,float angle)
+    public Vector3 RayArrayHit(int arrHorCount, int arrVertCount, float angle, Transform target)
     {
         Vector3 toReturn = new Vector3(0.0f,0.0f,0.0f);
         Vector3 start = target.position - gameObject.transform.position;
