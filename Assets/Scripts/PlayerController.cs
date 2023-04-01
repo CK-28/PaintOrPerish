@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public CharacterController controller;
+    public CapsuleCollider collider;
     public float rotateSpeed = 5f;
     public float moveSpeed = 10f;
 
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
 
     private bool isControllable = true;
+    public bool isDead = false;
 
     private new Animation animation;
 
@@ -25,24 +27,27 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animation = GetComponent<Animation>();
+        collider = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Camera rotation using mouse input
         transform.Rotate(0, Input.GetAxis("Mouse X") * rotateSpeed, 0);
 
+        // Movement using keyboard input
         playerVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         playerVelocity = transform.TransformDirection(playerVelocity);
 
-        // Jumping functionality
+        // Jumping when space is clicked
         if (controller.isGrounded && Input.GetButtonDown("Jump"))
         {
             Debug.Log("Jump");
             yVelocity = Mathf.Sqrt(jumpHeight * -1f * (gravity));
         }
 
-        // Running speed
+        // Set running speed when shift is clicked
         if (Input.GetButtonDown("Run"))
         {
             moveSpeed = 20f;
@@ -52,22 +57,42 @@ public class PlayerController : MonoBehaviour
             moveSpeed = 10f;
         }
 
-        // Crouch speed
+        // Set crouch speed and lower camera movement when control is clicked
         if (Input.GetButtonDown("Crouch"))
         {
             moveSpeed = 5f;
+            // CharacterController and CapsuleCollider change size when crouching to account for smaller hitbox
+            controller.height = 1.6f;
+            collider.height = 1.6f;
         }
         if (Input.GetButtonUp("Crouch"))
         {
             moveSpeed = 10f;
+            controller.height = 2.2f;
+            collider.height = 2.2f;
         }
 
         yVelocity += gravity * Time.deltaTime;
 
         playerVelocity.y = yVelocity;
 
-
         CollisionFlags flags = controller.Move(playerVelocity * Time.deltaTime * moveSpeed);
-        
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "paintballBlue") //collision is enemy paintball
+        {
+            Debug.Log("Dead!");
+            // set dead
+            isDead = true;
+        }
+    }
+
+    // Checking if character is dead
+    public bool IsDead
+    {
+        get { return isDead; }
+        set { isDead = value; }
     }
 }

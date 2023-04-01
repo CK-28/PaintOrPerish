@@ -23,13 +23,6 @@ public class EnemyAIController : AIController
 
     private GameObject gun;
 
-    public float fieldOfView = 130.0f;
-    public float sightDistance = 20.0f;
-    public float attackDistance = 5.0f;
-    public float attackCooldown = 1.0f;
-
-    private NavMeshAgent navMeshAgent;
-
     private TDMDefend defendObjective;
     private TDMRoam roamObjective;
     private float roamCooldown = 5.0f;
@@ -64,7 +57,7 @@ public class EnemyAIController : AIController
     override
     public bool EnemySeen()
     {
-        GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
+        /*GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
 
         float angleToTurn = 0;
         Vector3 playerPos = new Vector3(0, 0, 0);
@@ -82,13 +75,27 @@ public class EnemyAIController : AIController
             float diff = diffInPosition();
 
             // Checking angle in both directions, distance, and if player is alive
-            if (angleToTurn <= (fieldOfView / 2) && angleToTurn >= (fieldOfView / -2) && diff <= sightDistance /*&& (playerStatus.isAlive())*/)
+            if (angleToTurn <= (fieldOfView / 2) && angleToTurn >= (fieldOfView / -2) && diff <= sightDistance *//*&& (playerStatus.isAlive())*//*)
             {
                 return true;
             }
             else
             {
                 return false;
+            }
+        }*/
+
+        Vision vis = GetComponent<Vision>();
+        Transform target;
+        int targetIndex = FindNearestEnemy();
+
+        if(targetIndex >= 0)
+        {
+            target = enemies[targetIndex].transform;
+            if (vis.EnemySeen(target) != new Vector3(0, 0, 0))
+            {
+                Debug.Log("Enemy Seen!");
+                return true;
             }
         }
 
@@ -239,6 +246,9 @@ public class EnemyAIController : AIController
         navMeshAgent = GetComponent<NavMeshAgent>();
         defendObjective = GetComponent<TDMDefend>();
         roamObjective = GetComponent<TDMRoam>();
+
+        enemies = GameObject.FindGameObjectsWithTag("RedTeam");
+        Debug.Log("found " + enemies.Length + " enemies");
         //animation = GetComponent<Animation>();
         //GameObject tmp = GameObject.FindWithTag("Player");
         //if (tmp != null)

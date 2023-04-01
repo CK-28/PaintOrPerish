@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
 public class FriendlyAIController : AIController
 {
     private CharacterController controller;
@@ -20,12 +19,6 @@ public class FriendlyAIController : AIController
 
     private GameObject gun;
 
-    public float fieldOfView = 130.0f;
-    public float sightDistance = 20.0f;
-    public float attackDistance = 5.0f;
-    public float attackCooldown = 1.0f;
-
-    private NavMeshAgent navMeshAgent;
 
     private TDMDefend defendObjective;
 
@@ -62,7 +55,7 @@ public class FriendlyAIController : AIController
     override
     public bool EnemySeen()
     {
-        GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
+        GameObject player = GameObject.FindGameObjectsWithTag("RedTeam")[0];
 
         float angleToTurn = 0;
         Vector3 playerPos = new Vector3(0, 0, 0);
