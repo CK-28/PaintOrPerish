@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -3867584644062099433}
   m_Layer: 0
   m_Name: paintballBlue
-  m_TagString: paintballRed
+  m_TagString: paintballBlue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
