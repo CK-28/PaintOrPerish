@@ -31,60 +31,28 @@ public class EnemyAIController : AIController
     override
     public bool EnemyInRange()
     {
-        GameObject player = GameObject.Find("Player");
+        int targetIndex = FindNearestEnemy();
+        Transform target;
+        float diff;
 
-        if (player)
+        if(targetIndex >= 0)
         {
-            PlayerStatus playerStatus = player.GetComponent(typeof(PlayerStatus)) as PlayerStatus;
+            target = enemies[targetIndex].transform;
+            diff = diffInPosition(target);
 
-            float diff = diffInPosition();
-
-            // Checking distance
-            if (diff <= attackDistance && (playerStatus.isAlive()))
+            if(diff <= attackDistance)
             {
                 return true;
-            }
-            else
-            {
-                return false;
             }
         }
 
         return false;
     }
 
-    // Checking if enemy is within FOV (180 degrees)
+    // Checking if enemy is seen
     override
     public bool EnemySeen()
     {
-        /*GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
-
-        float angleToTurn = 0;
-        Vector3 playerPos = new Vector3(0, 0, 0);
-
-        if (player)
-        {
-            PlayerStatus playerStatus = player.GetComponent<PlayerStatus>();//(typeof(PlayerStatus)) as PlayerStatus;
-            playerPos = player.transform.position;
-
-            // A1 Goalie Logic to find angle between NPC facing direction and player
-            Vector3 relativePos = controller.transform.InverseTransformPoint(playerPos);
-            angleToTurn = Mathf.Atan2(relativePos.x, relativePos.z) * Mathf.Rad2Deg;
-
-            // Finding distance between NPC and player
-            float diff = diffInPosition();
-
-            // Checking angle in both directions, distance, and if player is alive
-            if (angleToTurn <= (fieldOfView / 2) && angleToTurn >= (fieldOfView / -2) && diff <= sightDistance *//*&& (playerStatus.isAlive())*//*)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }*/
-
         Vision vis = GetComponent<Vision>();
         Transform target;
         int targetIndex = FindNearestEnemy();
@@ -102,25 +70,24 @@ public class EnemyAIController : AIController
         return false;
     }
 
-    // Function to get vector magnitude between Enemy and AI
-    public float diffInPosition()
+    // Function to get vector magnitude to target
+    public float diffInPosition(Transform target)
     {
         float diff = 0.0f;
 
         // Grab enemy position
-        GameObject player = GameObject.Find("Player");
-        Vector3 playerPos = new Vector3(0, 0, 0);
+        Vector3 pos = new Vector3(0, 0, 0);
 
-        if (player)
+        if (target)
         {
             // Grab Player position
-            playerPos = player.transform.position;
+            pos = target.transform.position;
 
             // Grab NPC position
             Vector3 AIPos = controller.transform.position;
 
             // Find the difference between positions
-            Vector3 u = AIPos - playerPos;
+            Vector3 u = AIPos - pos;
             diff = u.magnitude;
         }
 
@@ -139,14 +106,21 @@ public class EnemyAIController : AIController
     override
     public void BeApproaching()
     {
-        GameObject player = GameObject.Find("Player");
+        /*GameObject player = GameObject.Find("Player");
         Vector3 playerPos = player.transform.position;
         Vector3 u = (playerPos - controller.transform.position).normalized;
 
         movementSpeed = 5;
         moveDirection = u;
 
-        controller.transform.LookAt(playerPos);
+        controller.transform.LookAt(playerPos);*/
+        int targetIndex = FindNearestEnemy();
+        GameObject target;
+        if (targetIndex >= 0)
+        {
+            target = enemies[targetIndex];
+            navMeshAgent.destination = target.transform.position;
+        }
     }
 
     override
