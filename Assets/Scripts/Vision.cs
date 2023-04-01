@@ -76,15 +76,16 @@ public class Vision : MonoBehaviour
                 bool hitsTarget = Physics.Raycast(gameObject.transform.position, castAttempt, out hit, sightDistance);
                 if (hitsTarget)
                 {
-                    Debug.DrawRay(transform.position, castAttempt, Color.blue, 15, false);
+                    //Debug.DrawRay(transform.position, castAttempt, Color.blue, 15, false);
 
                     if (hit.transform.gameObject.tag == enemyTag) // enemyTag is public. check the editor
                     {
-                        Debug.DrawRay(transform.position, castAttempt, Color.red, 15, false);
+                        //Debug.DrawRay(transform.position, castAttempt, Color.red, 15, false);
                         return castAttempt;
                     }
-                    else{
-                        Debug.DrawRay(transform.position, castAttempt, Color.green, 15, false);
+                    else
+                    {
+                        //Debug.DrawRay(transform.position, castAttempt, Color.green, 15, false);
                     }
                 }
             }

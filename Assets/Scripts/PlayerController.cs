@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public CharacterController controller;
+    public CapsuleCollider collider;
     public float rotateSpeed = 5f;
     public float moveSpeed = 10f;
 
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animation = GetComponent<Animation>();
+        collider = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
@@ -59,12 +61,15 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Crouch"))
         {
             moveSpeed = 5f;
-            controller.height = controller.height / 2;
+            // CharacterController and CapsuleCollider change size when crouching to account for smaller hitbox
+            controller.height = 1.6f;
+            collider.height = 1.6f;
         }
         if (Input.GetButtonUp("Crouch"))
         {
             moveSpeed = 10f;
-            controller.height = controller.height * 2;
+            controller.height = 2.2f;
+            collider.height = 2.2f;
         }
 
         yVelocity += gravity * Time.deltaTime;
