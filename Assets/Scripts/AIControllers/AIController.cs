@@ -18,12 +18,16 @@ public abstract class AIController : MonoBehaviour
     public float attackCooldown = 1.0f;
 
     public NavMeshAgent navMeshAgent;
+    public TDMDefend defendObjective;
+    public TDMRoam roamObjective;
+    public float roamCooldown = 5.0f;
 
+    public CharacterController controller;
+    private Animator mAnimator;
 
     public abstract void BeIdle();
     public abstract void BeApproaching();
     public abstract void BeShooting();
-    public abstract void BeObjective();
     public abstract void goToSpawn();
 
     // Checking if character is dead
@@ -152,5 +156,45 @@ public abstract class AIController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void BeObjective()
+    {
+        mAnimator = GetComponent<Animator>();
+
+        if (myRole == Role.Defend)
+        {
+            // get point
+            Transform location = defendObjective.getLocation();
+            Vector3 position = defendObjective.getPosition();
+            // go there
+            navMeshAgent.destination = position;
+            // hang out
+            if (Vector3.Distance(position, controller.transform.position) < 1)
+            {
+                Quaternion rotation = Quaternion.LookRotation(location.forward, Vector3.up);
+                controller.transform.rotation = rotation;
+                mAnimator.SetTrigger("TriCrouch");
+            }
+            // move
+        }
+        else if (myRole == Role.Roam)
+        {
+            Vector3 position = roamObjective.getPosition();
+            navMeshAgent.destination = position;
+            if (Vector3.Distance(position, controller.transform.position) < 1)
+            {
+                if (roamCooldown <= 0)
+                {
+                    roamObjective.getNextLocation();
+                    roamCooldown = 1.0f;
+                }
+                else
+                {
+                    roamCooldown = roamCooldown - Time.deltaTime;
+                }
+            }
+        }
+
     }
 }

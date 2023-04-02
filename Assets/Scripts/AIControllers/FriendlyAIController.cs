@@ -8,8 +8,6 @@ public class FriendlyAIController : AIController
     public GameObject TheGame;
     TheGame gameManager;
 
-
-    private CharacterController controller;
     private new Animation animation;
 
     private bool isControllable = true;
@@ -22,12 +20,6 @@ public class FriendlyAIController : AIController
     private Transform target;
 
     private GameObject gun;
-
-
-    private TDMDefend defendObjective;
-
-    private TDMRoam roamObjective;
-    private float roamCooldown = 5.0f;
 
     override
     public void BeIdle()
@@ -70,43 +62,6 @@ public class FriendlyAIController : AIController
         }
 
         return;
-    }
-
-    override
-    public void BeObjective()
-    {
-        if(myRole == Role.Defend)
-        {
-            // get point
-            Transform location = defendObjective.getLocation();
-            Vector3 position = defendObjective.getPosition();
-            // go there
-            navMeshAgent.destination = position;
-            // hang out
-            if (Vector3.Distance(position, controller.transform.position) < 1)
-            {
-                Quaternion rotation = Quaternion.LookRotation(location.forward, Vector3.up);
-                controller.transform.rotation = rotation;
-            }
-            // move
-        }
-        else if(myRole == Role.Roam)
-        {
-            Vector3 position = roamObjective.getPosition();
-            navMeshAgent.destination = position;
-            if (Vector3.Distance(position, controller.transform.position) < 1)
-            {
-                if (roamCooldown <= 0)
-                {
-                    roamObjective.getNextLocation();
-                    roamCooldown = 1.0f;
-                }
-                else
-                {
-                    roamCooldown = roamCooldown - Time.deltaTime;
-                }
-            } 
-        }
     }
 
     override
