@@ -8,4 +8,14 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("TDMScene");
     }
+
+    public void ShowTutorial()
+    {
+        SceneManager.LoadScene("TutorialScene");
+    }
+
+    public void ShowMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
