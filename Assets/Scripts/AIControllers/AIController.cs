@@ -20,8 +20,6 @@ public abstract class AIController : MonoBehaviour
     public NavMeshAgent navMeshAgent;
 
 
-    public abstract bool EnemyInRange();
-    public abstract bool EnemySeen();
     public abstract void BeIdle();
     public abstract void BeApproaching();
     public abstract void BeShooting();
@@ -38,6 +36,14 @@ public abstract class AIController : MonoBehaviour
     public void ChangeState(State newState)
     {
         currentState = newState;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "paintball") //collision is enemy paintball
+        {
+            Debug.Log("Dead!");
+            isDead = true;
+        }
     }
 
     public int FindNearestEnemy()
@@ -75,7 +81,7 @@ public abstract class AIController : MonoBehaviour
             forward.y = 0;
             forward = Vector3.Normalize(forward);
 
-            if (dist <= attackDistance)
+            if (dist <= sightDistance)
             {
                 if (dist < minDistance)
                 {
@@ -87,5 +93,72 @@ public abstract class AIController : MonoBehaviour
         }
 
         return closest;
+    }
+
+    // Function to get vector magnitude to target
+    public float diffInPosition(Transform target)
+    {
+        float diff = 0.0f;
+
+        // Grab enemy position
+        Vector3 pos = new Vector3(0, 0, 0);
+
+        if (target)
+        {
+            // Grab Player position
+            pos = target.transform.position;
+
+            // Grab NPC position
+            Vector3 AIPos = transform.position;
+
+            // Find the difference between positions
+            Vector3 u = AIPos - pos;
+            diff = u.magnitude;
+        }
+
+        return diff;
+    }
+
+    // Checking if enemy is within range of attack
+    public bool EnemyInRange()
+    {
+        int targetIndex = FindNearestEnemy();
+        Transform target;
+        float diff;
+
+        if (targetIndex >= 0)
+        {
+            target = enemies[targetIndex].transform;
+            diff = diffInPosition(target);
+            Debug.Log("Enemy found");
+
+            if (diff <= attackDistance)
+            {
+                Debug.Log("Enemy in range!");
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Checking if enemy is seen
+    public bool EnemySeen()
+    {
+        Vision vis = GetComponent<Vision>();
+        Transform target;
+        int targetIndex = FindNearestEnemy();
+
+        if (targetIndex >= 0)
+        {
+            target = enemies[targetIndex].transform;
+            if (vis.EnemySeen(target) != new Vector3(0, 0, 0))
+            {
+                Debug.Log("Enemy Seen!");
+                return true;
+            }
+        }
+
+        return false;
     }
 }

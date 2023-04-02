@@ -19,7 +19,7 @@ public class StateObjective : State
 		else if (character.EnemySeen() && !character.EnemyInRange())	//If see and out of range, approach
 		{
 			Debug.Log("Going from PlayingObjective to Approaching");
-			character.ChangeState(new StateShoot());
+			character.ChangeState(new StateApproach());
 		}
 		else
 		{

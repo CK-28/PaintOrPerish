@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 3456606346429656914, guid: 96586687f1e035e4eaff5bdf9efda1ea, type: 3}
-  launchVelocity: 1000
+  launchVelocity: 5000
 --- !u!1001 &1908706835919113784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -205,9 +205,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.2
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!143 &1547886792
 CharacterController:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ CharacterController:
   m_StepOffset: 0.5
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.05, z: 0}
+  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!114 &1547886793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,10 +239,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
+  enemies: []
+  myRole: 0
   fieldOfView: 130
   sightDistance: 20
-  attackDistance: 20
+  attackDistance: 10
   attackCooldown: 1
+  navMeshAgent: {fileID: 0}
 --- !u!195 &1547886794
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -27,72 +27,7 @@ public class EnemyAIController : AIController
     private TDMRoam roamObjective;
     private float roamCooldown = 5.0f;
 
-    // Checking if enemy is within range of attack
-    override
-    public bool EnemyInRange()
-    {
-        int targetIndex = FindNearestEnemy();
-        Transform target;
-        float diff;
 
-        if(targetIndex >= 0)
-        {
-            target = enemies[targetIndex].transform;
-            diff = diffInPosition(target);
-
-            if(diff <= attackDistance)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    // Checking if enemy is seen
-    override
-    public bool EnemySeen()
-    {
-        Vision vis = GetComponent<Vision>();
-        Transform target;
-        int targetIndex = FindNearestEnemy();
-
-        if(targetIndex >= 0)
-        {
-            target = enemies[targetIndex].transform;
-            if (vis.EnemySeen(target) != new Vector3(0, 0, 0))
-            {
-                Debug.Log("Enemy Seen!");
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    // Function to get vector magnitude to target
-    public float diffInPosition(Transform target)
-    {
-        float diff = 0.0f;
-
-        // Grab enemy position
-        Vector3 pos = new Vector3(0, 0, 0);
-
-        if (target)
-        {
-            // Grab Player position
-            pos = target.transform.position;
-
-            // Grab NPC position
-            Vector3 AIPos = controller.transform.position;
-
-            // Find the difference between positions
-            Vector3 u = AIPos - pos;
-            diff = u.magnitude;
-        }
-
-        return diff;
-    }
 
     override
     public void BeIdle()
@@ -201,16 +136,7 @@ public class EnemyAIController : AIController
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Hit!");
-        if(collision.gameObject.tag == "paintballRed") //collision is enemy paintball
-        {
-            Debug.Log("Dead!");
-            // set dead
-            isDead = true;
-        }
-    }
+    
 
     // Use this for initialization
     void Start()

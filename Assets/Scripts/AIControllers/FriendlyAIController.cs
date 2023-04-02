@@ -25,92 +25,6 @@ public class FriendlyAIController : AIController
     private TDMRoam roamObjective;
     private float roamCooldown = 5.0f;
 
-    // Checking if enemy is within range of attack
-    override
-    public bool EnemyInRange()
-    {
-        GameObject player = GameObject.Find("Player");
-
-        if (player)
-        {
-            PlayerStatus playerStatus = player.GetComponent(typeof(PlayerStatus)) as PlayerStatus;
-
-            float diff = diffInPosition();
-
-            // Checking distance
-            if (diff <= attackDistance && (playerStatus.isAlive()))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        return false;
-    }
-
-    // Checking if enemy is within FOV (180 degrees)
-    override
-    public bool EnemySeen()
-    {
-        GameObject player = GameObject.FindGameObjectsWithTag("RedTeam")[0];
-
-        float angleToTurn = 0;
-        Vector3 playerPos = new Vector3(0, 0, 0);
-
-        if (player)
-        {
-            PlayerStatus playerStatus = player.GetComponent<PlayerStatus>();//(typeof(PlayerStatus)) as PlayerStatus;
-            playerPos = player.transform.position;
-
-            // A1 Goalie Logic to find angle between NPC facing direction and player
-            Vector3 relativePos = controller.transform.InverseTransformPoint(playerPos);
-            angleToTurn = Mathf.Atan2(relativePos.x, relativePos.z) * Mathf.Rad2Deg;
-
-            // Finding distance between NPC and player
-            float diff = diffInPosition();
-
-            // Checking angle in both directions, distance, and if player is alive
-            if (angleToTurn <= (fieldOfView / 2) && angleToTurn >= (fieldOfView / -2) && diff <= sightDistance /*&& (playerStatus.isAlive())*/)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        return false;
-    }
-
-    // Function to get vector magnitude between Enemy and AI
-    public float diffInPosition()
-    {
-        float diff = 0.0f;
-
-        // Grab enemy position
-        GameObject player = GameObject.Find("Player");
-        Vector3 playerPos = new Vector3(0, 0, 0);
-
-        if (player)
-        {
-            // Grab Player position
-            playerPos = player.transform.position;
-
-            // Grab NPC position
-            Vector3 AIPos = controller.transform.position;
-
-            // Find the difference between positions
-            Vector3 u = AIPos - playerPos;
-            diff = u.magnitude;
-        }
-
-        return diff;
-    }
-
     override
     public void BeIdle()
     {
@@ -137,9 +51,8 @@ public class FriendlyAIController : AIController
     public void BeShooting()
     {
         //animation.CrossFade("shoot", 0.2f);
-        Debug.Log("Homie is shooting");
         movementSpeed = 0;
-        gun = controller.transform.GetChild(0).gameObject;
+        gun = controller.transform.GetChild(2).gameObject;
         
 
         if (attackCooldown <= 0)
@@ -207,17 +120,6 @@ public class FriendlyAIController : AIController
             isDead = false;
             defendObjective.generateLocation();
             roamObjective.chooseRoute();
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Hit!");
-        if(collision.gameObject.tag == "paintballBlue") //collision is paintball
-        {
-            Debug.Log("Dead!");
-            // set dead
-            isDead = true;
         }
     }
 
