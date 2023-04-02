@@ -37,14 +37,6 @@ public abstract class AIController : MonoBehaviour
     {
         currentState = newState;
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "paintball") //collision is enemy paintball
-        {
-            Debug.Log("Dead!");
-            isDead = true;
-        }
-    }
 
     public int FindNearestEnemy()
     {

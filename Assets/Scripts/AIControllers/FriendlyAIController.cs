@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public class FriendlyAIController : AIController
 {
+    public GameObject TheGame;
+    TheGame gameManager;
+
+
     private CharacterController controller;
     private new Animation animation;
 
@@ -122,6 +126,17 @@ public class FriendlyAIController : AIController
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "paintball" && !isDead) //collision is enemy paintball
+        {
+            Debug.Log("Dead!");
+            isDead = true;
+
+            gameManager.updateBlueScore(1);
+        }
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -132,13 +147,8 @@ public class FriendlyAIController : AIController
         roamObjective = GetComponent<TDMRoam>();
 
         enemies = GameObject.FindGameObjectsWithTag("BlueTeam");
-        //animation = GetComponent<Animation>();
-        //GameObject tmp = GameObject.FindWithTag("Player");
-        //if (tmp != null)
-        //{
-        //target = tmp.transform;
-        //playerStatus = tmp.GetComponent<PlayerStatus>();
-        //}
+        TheGame = GameObject.Find("TheGame");
+        gameManager = TheGame.GetComponent<TheGame>();
 
         ChangeState(new StateIdle());
     }
@@ -152,16 +162,5 @@ public class FriendlyAIController : AIController
         }
 
         currentState.Execute(this);
-        //transform.LookAt(new Vector3(moveDirection.x, 0, moveDirection.z));
-
-       /* yVelocity += gravity * Time.deltaTime;
-
-        moveDirection.y = yVelocity;
-
-        *//*if (!isDead)
-        {
-            controller.Move(moveDirection * Time.deltaTime * movementSpeed);
-        }*//*
-        controller.Move(moveDirection * Time.deltaTime * movementSpeed);*/
     }
 }

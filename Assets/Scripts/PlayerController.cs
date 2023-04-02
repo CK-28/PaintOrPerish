@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject TheGame;
     public CharacterController controller;
     public CapsuleCollider collider;
     public float rotateSpeed = 5f;
@@ -30,6 +31,8 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animation = GetComponent<Animation>();
         collider = GetComponent<CapsuleCollider>();
+
+        TheGame = GameObject.Find("TheGame");
     }
 
     // Update is called once per frame
@@ -37,6 +40,12 @@ public class PlayerController : MonoBehaviour
     {
         NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
         Animator mAnimator = GetComponent<Animator>();
+
+        TheGame gameManager = TheGame.GetComponent<TheGame>();
+        if (gameManager.GameOver()) {
+            isControllable = false;
+            Debug.Log("Game Over");
+        }
 
 
         if (isControllable)
@@ -85,7 +94,7 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = yVelocity;
 
             CollisionFlags flags = controller.Move(playerVelocity * Time.deltaTime * moveSpeed);
-        } else
+        } else if(isDead)
         {
             GameObject spawn = GameObject.Find("SpawnANav");
             Vector3 spawnLocation = spawn.transform.position;
@@ -110,12 +119,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "paintball") //collision is enemy paintball
+        if (collision.gameObject.tag == "paintball" && !isDead) //collision is paintball
         {
             Debug.Log("Player died!");
             // set dead
             isDead = true;
             isControllable = false;
+
+            TheGame.GetComponent<TheGame>().updateBlueScore(1);
         }
     }
 
@@ -124,5 +135,12 @@ public class PlayerController : MonoBehaviour
     {
         get { return isDead; }
         set { isDead = value; }
+    }
+
+    // Checking if character is controllable
+    public bool IsControllable
+    {
+        get { return isControllable; }
+        set { isControllable = value; }
     }
 }

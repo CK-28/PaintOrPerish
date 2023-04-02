@@ -17,6 +17,8 @@ TagManager:
   - paintballBlue
   - BlueTeam
   - RedTeam
+  - GameOver
+  - Crosshair
   layers:
   - Default
   - TransparentFX

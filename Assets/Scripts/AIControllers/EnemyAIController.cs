@@ -6,6 +6,9 @@ using UnityEngine.AI;
 
 public class EnemyAIController : AIController
 {
+    public GameObject TheGame;
+    TheGame gameManager;
+
     private CharacterController controller;
     //private State currentState;
     private new Animation animation;
@@ -136,12 +139,20 @@ public class EnemyAIController : AIController
         }
     }
 
-    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "paintball" && !isDead) //collision is enemy paintball
+        {
+            Debug.Log("Dead!");
+            isDead = true;
+
+            gameManager.updateRedScore(1);
+        }
+    }
 
     // Use this for initialization
     void Start()
     {
-
         controller = GetComponent<CharacterController>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         defendObjective = GetComponent<TDMDefend>();
@@ -149,13 +160,9 @@ public class EnemyAIController : AIController
 
         enemies = GameObject.FindGameObjectsWithTag("RedTeam");
         Debug.Log("found " + enemies.Length + " enemies");
-        //animation = GetComponent<Animation>();
-        //GameObject tmp = GameObject.FindWithTag("Player");
-        //if (tmp != null)
-        //{
-        //target = tmp.transform;
-        //playerStatus = tmp.GetComponent<PlayerStatus>();
-        //}
+
+        TheGame = GameObject.Find("TheGame");
+        gameManager = TheGame.GetComponent<TheGame>();
 
         ChangeState(new StateIdle());
     }
@@ -172,16 +179,5 @@ public class EnemyAIController : AIController
         {
             currentState.Execute(this);
         }
-        //transform.LookAt(new Vector3(moveDirection.x, 0, moveDirection.z));
-
-        /* yVelocity += gravity * Time.deltaTime;
-
-         moveDirection.y = yVelocity;
-
-         *//*if (!isDead)
-         {
-             controller.Move(moveDirection * Time.deltaTime * movementSpeed);
-         }*//*
-         controller.Move(moveDirection * Time.deltaTime * movementSpeed);*/
     }
 }

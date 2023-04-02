@@ -27,11 +27,8 @@ public class AnimationController : MonoBehaviour
         mAnimator.ResetTrigger("TriIdle");
         mAnimator.ResetTrigger("TriArmRaise");
 
-        if (mAnimator != null && !playerController.IsDead)
+        if (mAnimator != null && playerController.IsControllable)
         {
-            
-            
-
             // Deals with animation related to standing upright
             if (playerController.moveSpeed == 10f && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
             {
