@@ -5,7 +5,7 @@ using UnityEngine;
 public class AILaunchProjectile : MonoBehaviour
 {
     public GameObject projectile;
-    public float launchVelocity = 10000f;
+    public float launchVelocity = 5000f;
 
     // Start is called before the first frame update
     void Start()

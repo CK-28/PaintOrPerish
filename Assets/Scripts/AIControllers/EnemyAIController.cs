@@ -23,71 +23,26 @@ public class EnemyAIController : AIController
 
     private Transform target;
 
-    private GameObject gun;
-
-    override
-    public void BeIdle()
-    {
-        //animation.CrossFade("idle", 0.2f);
-        // Debug.Log("Homie in idle");
-        moveDirection = new Vector3(0, 0, 0);
-
-    }
-
-    override
-    public void BeApproaching()
-    {
-        /*GameObject player = GameObject.Find("Player");
-        Vector3 playerPos = player.transform.position;
-        Vector3 u = (playerPos - controller.transform.position).normalized;
-
-        movementSpeed = 5;
-        moveDirection = u;
-
-        controller.transform.LookAt(playerPos);*/
-        int targetIndex = FindNearestEnemy();
-        GameObject target;
-        if (targetIndex >= 0)
-        {
-            target = enemies[targetIndex];
-            navMeshAgent.destination = target.transform.position;
-        }
-    }
-
-    override
-    public void BeShooting()
-    {
-        //animation.CrossFade("shoot", 0.2f);
-        Debug.Log("Homie is shooting");
-        movementSpeed = 0;
-        gun = controller.transform.GetChild(2).gameObject;
-        
-
-        if (attackCooldown <= 0)
-        {
-            gun.GetComponent<AILaunchProjectile>().LaunchProjectile();
-            attackCooldown = 1.0f;
-        }
-        else
-        {
-            attackCooldown = attackCooldown - Time.deltaTime;
-        }
-
-        return;
-    }
-
     override
     public void goToSpawn()
     {
         GameObject spawn = GameObject.Find("Spawn Point");
         Vector3 spawnLocation = spawn.transform.position;
-        if (!((controller.transform.position - spawnLocation).magnitude <= 5)) // character is not at spawn
+        mAnimator.SetTrigger("TriDead");
+        if (!((controller.transform.position - spawnLocation).magnitude <= 1)) // character is not at spawn
         {
-            // TODO: add better pathfinding/collision avoidance with rayasting
+            navMeshAgent.speed = 5;
             navMeshAgent.destination = spawnLocation;
+
+            mAnimator.SetTrigger("TriDead");
+            mAnimator.SetTrigger("TriArmRaise");
+            mAnimator.SetTrigger("TriWalkArmRaise");
         }
         else
         {
+            mAnimator.SetTrigger("TriIdle");
+            mAnimator.ResetTrigger("TriDead");
+
             isDead = false;
             defendObjective.generateLocation();
             roamObjective.chooseRoute();
@@ -102,6 +57,7 @@ public class EnemyAIController : AIController
             isDead = true;
 
             gameManager.updateRedScore(1);
+            // mAnimator.SetTrigger("TriDead");
         }
     }
 
@@ -119,12 +75,21 @@ public class EnemyAIController : AIController
         TheGame = GameObject.Find("TheGame");
         gameManager = TheGame.GetComponent<TheGame>();
 
+        mAnimator = GetComponent<Animator>();
+
         ChangeState(new StateIdle());
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*mAnimator.ResetTrigger("TriWalk");*/
+        mAnimator.ResetTrigger("TriCrouch");
+        /*mAnimator.ResetTrigger("TriRun");
+        mAnimator.ResetTrigger("TriIdle");
+        mAnimator.ResetTrigger("TriArmRaise");
+        mAnimator.ResetTrigger("TriWalkArmRaise");*/
+
         if (!isControllable)
         {
             return;
