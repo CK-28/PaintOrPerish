@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -33,10 +35,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
+        Animator mAnimator = GetComponent<Animator>();
+
+
         if (isControllable)
         {
             // Camera rotation using mouse input
-            transform.Rotate(0, Input.GetAxis("Mouse X") * rotateSpeed, 0);
+            //transform.Rotate(0, Input.GetAxis("Mouse X") * rotateSpeed, 0);
 
             // Movement using keyboard input
             playerVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -81,7 +87,23 @@ public class PlayerController : MonoBehaviour
             CollisionFlags flags = controller.Move(playerVelocity * Time.deltaTime * moveSpeed);
         } else
         {
-
+            GameObject spawn = GameObject.Find("SpawnANav");
+            Vector3 spawnLocation = spawn.transform.position;
+            if (!((controller.transform.position - spawnLocation).magnitude <= 5)) // character is not at spawn
+            {
+                navMeshAgent.enabled = true;
+                navMeshAgent.destination = spawnLocation;
+                mAnimator.SetTrigger("TriWalkArmRaise");
+                mAnimator.ResetTrigger("TriDead");
+            }
+            else
+            {
+                isDead = false;
+                isControllable = true;
+                navMeshAgent.enabled = false;
+                mAnimator.SetTrigger("TriIdle");
+                mAnimator.ResetTrigger("TriDead");
+            }
         }
         
     }

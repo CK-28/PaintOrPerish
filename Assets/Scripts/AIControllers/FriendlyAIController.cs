@@ -112,7 +112,6 @@ public class FriendlyAIController : AIController
         Vector3 spawnLocation = spawn.transform.position;
         if (!((controller.transform.position - spawnLocation).magnitude <= 5)) // character is not at spawn
         {
-            // TODO: add better pathfinding/collision avoidance with rayasting
             navMeshAgent.destination = spawnLocation;
         }
         else

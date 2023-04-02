@@ -21,13 +21,16 @@ public class AnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (mAnimator != null)
+        mAnimator.ResetTrigger("TriWalk");
+        mAnimator.ResetTrigger("TriCrouchWalk");
+        mAnimator.ResetTrigger("TriRun");
+        mAnimator.ResetTrigger("TriIdle");
+        mAnimator.ResetTrigger("TriArmRaise");
+
+        if (mAnimator != null && !playerController.IsDead)
         {
-            mAnimator.ResetTrigger("TriWalk");
-            mAnimator.ResetTrigger("TriCrouchWalk");
-            mAnimator.ResetTrigger("TriRun");
-            mAnimator.ResetTrigger("TriIdle");
-            //mAnimator.ResetTrigger("Tri");
+            
+            
 
             // Deals with animation related to standing upright
             if (playerController.moveSpeed == 10f && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
@@ -67,12 +70,11 @@ public class AnimationController : MonoBehaviour
                 characterController.center = new Vector3(0, 1.15f, 0);
                 capsuleCollider.center = new Vector3(0, 1.15f, 0);
             }
-
-            /*if (playerController.IsDead)
-            {
-                mAnimator.SetTrigger("TriDead");
-            }*/
-
+        }
+        else if (mAnimator != null && playerController.IsDead)
+        {
+            mAnimator.SetTrigger("TriDead");
+            mAnimator.SetTrigger("TriArmRaise");
         }
     }
 }
