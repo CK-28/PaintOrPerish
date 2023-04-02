@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TDMScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/TutorialScene.unity
+    guid: 88545c242fd38a94f99a75758c54409d
   m_configObjects: {}
