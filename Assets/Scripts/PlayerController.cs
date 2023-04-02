@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public CharacterController controller;
     public CapsuleCollider collider;
     public float rotateSpeed = 5f;
-    public float moveSpeed = 10f;
+    public float moveSpeed = 8f;
 
     Vector3 playerVelocity;
     float yVelocity = 0;
@@ -67,11 +67,11 @@ public class PlayerController : MonoBehaviour
             // Set running speed when shift is clicked
             if (Input.GetButtonDown("Run"))
             {
-                moveSpeed = 20f;
+                moveSpeed = 12f;
             }
             if (Input.GetButtonUp("Run"))
             {
-                moveSpeed = 10f;
+                moveSpeed = 8f;
             }
 
             // Set crouch speed and lower camera movement when control is clicked
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetButtonUp("Crouch"))
             {
-                moveSpeed = 10f;
+                moveSpeed = 8f;
                 controller.height = 2.2f;
                 collider.height = 2.2f;
             }

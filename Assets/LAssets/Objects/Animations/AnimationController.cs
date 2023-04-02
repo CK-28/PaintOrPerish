@@ -30,7 +30,7 @@ public class AnimationController : MonoBehaviour
         if (mAnimator != null && playerController.IsControllable)
         {
             // Deals with animation related to standing upright
-            if (playerController.moveSpeed == 10f && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
+            if (playerController.moveSpeed == 8f && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
             {
                 mAnimator.SetTrigger("TriWalk");
             }
@@ -38,7 +38,7 @@ public class AnimationController : MonoBehaviour
             {
                 mAnimator.SetTrigger("TriCrouchWalk");
             }
-            else if (playerController.moveSpeed == 20f && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
+            else if (playerController.moveSpeed == 12f && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
             {
                 mAnimator.SetTrigger("TriRun");
             }

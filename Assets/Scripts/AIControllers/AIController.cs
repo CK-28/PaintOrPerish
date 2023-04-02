@@ -23,11 +23,11 @@ public abstract class AIController : MonoBehaviour
     public float roamCooldown = 5.0f;
 
     public CharacterController controller;
-    private Animator mAnimator;
+    public Animator mAnimator;
 
-    public abstract void BeIdle();
-    public abstract void BeApproaching();
-    public abstract void BeShooting();
+    public GameObject gun;
+    public Transform shootAt;
+
     public abstract void goToSpawn();
 
     // Checking if character is dead
@@ -131,6 +131,7 @@ public abstract class AIController : MonoBehaviour
             if (diff <= attackDistance)
             {
                 Debug.Log("Enemy in range!");
+                shootAt = target;
                 return true;
             }
         }
@@ -158,12 +159,26 @@ public abstract class AIController : MonoBehaviour
         return false;
     }
 
+    public void BeIdle()
+    {
+        mAnimator.SetTrigger("TriIdle");
+
+        navMeshAgent.speed = 0;
+    }
+
     public void BeObjective()
     {
-        mAnimator = GetComponent<Animator>();
+        /*mAnimator.ResetTrigger("TriIdle");
+
+        mAnimator.ResetTrigger("TriDead");
+        mAnimator.ResetTrigger("TriArmRaise");
+        mAnimator.ResetTrigger("TriWalkArmRaise");*/
 
         if (myRole == Role.Defend)
         {
+            navMeshAgent.speed = 8;
+            mAnimator.SetTrigger("TriWalk");
+
             // get point
             Transform location = defendObjective.getLocation();
             Vector3 position = defendObjective.getPosition();
@@ -176,14 +191,19 @@ public abstract class AIController : MonoBehaviour
                 controller.transform.rotation = rotation;
                 mAnimator.SetTrigger("TriCrouch");
             }
-            // move
         }
         else if (myRole == Role.Roam)
         {
+            navMeshAgent.speed = 12;
+
             Vector3 position = roamObjective.getPosition();
             navMeshAgent.destination = position;
+            mAnimator.SetTrigger("TriRun");
+
             if (Vector3.Distance(position, controller.transform.position) < 1)
             {
+                mAnimator.ResetTrigger("TriRun");
+                mAnimator.SetTrigger("TriIdle");
                 if (roamCooldown <= 0)
                 {
                     roamObjective.getNextLocation();
@@ -195,6 +215,44 @@ public abstract class AIController : MonoBehaviour
                 }
             }
         }
+    }
 
+    public void BeApproaching()
+    {
+        mAnimator = GetComponent<Animator>();
+
+        int targetIndex = FindNearestEnemy();
+        GameObject target;
+        if (targetIndex >= 0)
+        {
+            navMeshAgent.speed = 5;
+            mAnimator.SetTrigger("TriWalk");
+
+            target = enemies[targetIndex];
+            navMeshAgent.destination = target.transform.position;
+        }
+    }
+
+    public void BeShooting()
+    {
+        // stop moving
+        navMeshAgent.speed = 0;
+
+        // look at target
+        transform.LookAt(shootAt);
+
+        gun = controller.transform.GetChild(2).gameObject;
+
+        if (attackCooldown <= 0)
+        {
+            gun.GetComponent<AILaunchProjectile>().LaunchProjectile();
+            attackCooldown = 1.0f;
+        }
+        else
+        {
+            attackCooldown = attackCooldown - Time.deltaTime;
+        }
+
+        return;
     }
 }

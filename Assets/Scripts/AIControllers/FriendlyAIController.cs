@@ -19,62 +19,26 @@ public class FriendlyAIController : AIController
 
     private Transform target;
 
-    private GameObject gun;
-
-    override
-    public void BeIdle()
-    {
-        //animation.CrossFade("idle", 0.2f);
-        // Debug.Log("Homie in idle");
-        moveDirection = new Vector3(0, 0, 0);
-
-    }
-
-    override
-    public void BeApproaching()
-    {
-        GameObject player = GameObject.Find("Player");
-        Vector3 playerPos = player.transform.position;
-        Vector3 u = (playerPos - controller.transform.position).normalized;
-
-        movementSpeed = 5;
-        moveDirection = u;
-
-        controller.transform.LookAt(playerPos);
-    }
-
-    override
-    public void BeShooting()
-    {
-        //animation.CrossFade("shoot", 0.2f);
-        movementSpeed = 0;
-        gun = controller.transform.GetChild(2).gameObject;
-        
-
-        if (attackCooldown <= 0)
-        {
-            gun.GetComponent<AILaunchProjectile>().LaunchProjectile();
-            attackCooldown = 1.0f;
-        }
-        else
-        {
-            attackCooldown = attackCooldown - Time.deltaTime;
-        }
-
-        return;
-    }
-
     override
     public void goToSpawn()
     {
         GameObject spawn = GameObject.Find("SpawnANav");
         Vector3 spawnLocation = spawn.transform.position;
-        if (!((controller.transform.position - spawnLocation).magnitude <= 5)) // character is not at spawn
+        if (!((controller.transform.position - spawnLocation).magnitude <= 1)) // character is not at spawn
         {
+            navMeshAgent.speed = 5;
             navMeshAgent.destination = spawnLocation;
+
+            mAnimator.SetTrigger("TriDead");
+            mAnimator.SetTrigger("TriArmRaise");
+            mAnimator.SetTrigger("TriWalkArmRaise");
+            //mAnimator.ResetTrigger("TriDead");
         }
         else
         {
+           mAnimator.SetTrigger("TriIdle");
+           mAnimator.ResetTrigger("TriDead");
+
             isDead = false;
             defendObjective.generateLocation();
             roamObjective.chooseRoute();
@@ -89,13 +53,14 @@ public class FriendlyAIController : AIController
             isDead = true;
 
             gameManager.updateBlueScore(1);
+
+            // mAnimator.SetTrigger("TriDead");
         }
     }
 
     // Use this for initialization
     void Start()
     {
-
         controller = GetComponent<CharacterController>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         defendObjective = GetComponent<TDMDefend>();
@@ -105,12 +70,25 @@ public class FriendlyAIController : AIController
         TheGame = GameObject.Find("TheGame");
         gameManager = TheGame.GetComponent<TheGame>();
 
+        mAnimator = GetComponent<Animator>();
+
         ChangeState(new StateIdle());
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*mAnimator.ResetTrigger("TriWalk");*/
+        mAnimator.ResetTrigger("TriCrouch");
+        /*mAnimator.ResetTrigger("TriRun");
+        mAnimator.ResetTrigger("TriIdle");
+        mAnimator.ResetTrigger("TriArmRaise");*/
+
+        /*if (isDead)
+        {
+            mAnimator.SetTrigger("TriDead");
+        }*/
+
         if (!isControllable)
         {
             return;

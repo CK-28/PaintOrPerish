@@ -5658,6 +5658,26 @@ MonoBehaviour:
   rayArrVert: 5
   rayCastAngle: 60
   enemyTag: RedTeam
+--- !u!95 &420213771
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420213750}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 380fcd083926ec44eb9c6b6eadbd1965, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1001 &421414950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12088,7 +12108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0.000000059604638, y: 0.000000021073424, z: 8.881783e-16, w: 1}
-  m_LocalPosition: {x: 0.094, y: 2.02, z: 0.155}
+  m_LocalPosition: {x: 0.094, y: 2.036, z: 0.504}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17301,7 +17321,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   collider: {fileID: 0}
   rotateSpeed: 5
-  moveSpeed: 10
+  moveSpeed: 8
   isDead: 0
 --- !u!143 &1361694878
 CharacterController:
@@ -25061,7 +25081,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1123415645, guid: f678c808165784f4488a5294d4822e5f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.249
+      value: -0.044
       objectReference: {fileID: 0}
     - target: {fileID: 1123415645, guid: f678c808165784f4488a5294d4822e5f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -25069,35 +25089,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1123415645, guid: f678c808165784f4488a5294d4822e5f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.869
+      value: 0.889
       objectReference: {fileID: 0}
     - target: {fileID: 1123415645, guid: f678c808165784f4488a5294d4822e5f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.628014
+      value: -0.69202983
       objectReference: {fileID: 0}
     - target: {fileID: 1123415645, guid: f678c808165784f4488a5294d4822e5f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0002525631
+      value: 0.00002410281
       objectReference: {fileID: 0}
     - target: {fileID: 1123415645, guid: f678c808165784f4488a5294d4822e5f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.77820194
+      value: 0.721869
       objectReference: {fileID: 0}
     - target: {fileID: 1123415645, guid: f678c808165784f4488a5294d4822e5f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00023490436
+      value: 0.000025142084
       objectReference: {fileID: 0}
     - target: {fileID: 1123415645, guid: f678c808165784f4488a5294d4822e5f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0.003
+      value: -0.004
       objectReference: {fileID: 0}
     - target: {fileID: 1123415645, guid: f678c808165784f4488a5294d4822e5f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 257.80798
+      value: 267.582
       objectReference: {fileID: 0}
     - target: {fileID: 1123415645, guid: f678c808165784f4488a5294d4822e5f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0.039
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1547886793, guid: f678c808165784f4488a5294d4822e5f, type: 3}
       propertyPath: myRole
@@ -27212,7 +27232,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 919132149059235420}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2.2
   m_Direction: 1
@@ -28422,7 +28442,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3708049620402161812, guid: a6d069490a8cc3842b19fff200f7722e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a6d069490a8cc3842b19fff200f7722e, type: 3}
 --- !u!4 &3710416247521144687
 Transform:
