@@ -25,6 +25,7 @@ public abstract class AIController : MonoBehaviour
     public float roamCooldown = 5.0f;
 
     public CharacterController controller;
+    public CapsuleCollider collider;
     public Animator mAnimator;
 
     public GameObject gun;
@@ -192,6 +193,14 @@ public abstract class AIController : MonoBehaviour
                 Quaternion rotation = Quaternion.LookRotation(location.forward, Vector3.up);
                 controller.transform.rotation = rotation;
                 mAnimator.SetTrigger("TriCrouch");
+
+                // CharacterController and CapsuleCollider change size when crouching to account for smaller hitbox
+                controller.height = 1.6f;
+                collider.height = 1.6f;
+
+                // CharacterController and CapsuleCollider move when crouching to account for shorter character height
+                controller.center = new Vector3(0, 1, 0);
+                collider.center = new Vector3(0, 1, 0);
             }
         }
         else if (myRole == Role.Roam)

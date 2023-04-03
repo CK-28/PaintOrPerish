@@ -19,6 +19,7 @@ TagManager:
   - RedTeam
   - GameOver
   - Crosshair
+  - Winner
   layers:
   - Default
   - TransparentFX

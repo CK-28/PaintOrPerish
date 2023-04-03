@@ -6,7 +6,7 @@ using UnityEngine.AI;
 // Handles all player behaviour
 public class PlayerController : MonoBehaviour
 {
-    public GameObject TheGame;
+    public GameObject TheGame, MainCamera;
     public CharacterController controller;
     public CapsuleCollider collider;
     public float rotateSpeed = 5f;
@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
         collider = GetComponent<CapsuleCollider>();
 
         TheGame = GameObject.Find("TheGame");
+        MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     // Update is called once per frame
@@ -44,7 +45,6 @@ public class PlayerController : MonoBehaviour
         TheGame gameManager = TheGame.GetComponent<TheGame>();
         if (gameManager.GameOver()) {
             isControllable = false;
-            Debug.Log("Game Over");
         }
 
         // If the game has not started, player cannot move
@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
         {
             if (isControllable)
             {
+<<<<<<< HEAD
                 // Movement using keyboard input
                 playerVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
                 playerVelocity = transform.TransformDirection(playerVelocity);
@@ -94,6 +95,40 @@ public class PlayerController : MonoBehaviour
 
                 CollisionFlags flags = controller.Move(playerVelocity * Time.deltaTime * moveSpeed);
             } else if (isDead)
+=======
+                moveSpeed = 5f;
+                // CharacterController and CapsuleCollider change size when crouching to account for smaller hitbox
+                controller.height = 1.6f;
+                collider.height = 1.6f;
+            }
+            if (Input.GetButtonUp("Crouch"))
+            {
+                moveSpeed = 8f;
+                controller.height = 2.2f;
+                collider.height = 2.2f;
+            }
+
+            yVelocity += gravity * Time.deltaTime;
+
+            playerVelocity.y = yVelocity;
+
+            CollisionFlags flags = controller.Move(playerVelocity * Time.deltaTime * moveSpeed);
+        } else if(isDead)
+        {
+            GameObject spawn = GameObject.Find("SpawnANav");
+            Vector3 spawnLocation = spawn.transform.position;
+            if (!((controller.transform.position - spawnLocation).magnitude <= 5)) // character is not at spawn
+            {
+                // Zoom out camera to see whats happening
+                //MainCamera.transform.position = new Vector3(MainCamera.transform.position.x, MainCamera.transform.position.y, (MainCamera.transform.position.z - 2));
+
+                navMeshAgent.enabled = true;
+                navMeshAgent.destination = spawnLocation;
+                mAnimator.SetTrigger("TriWalkArmRaise");
+                mAnimator.ResetTrigger("TriDead");
+            }
+            else
+>>>>>>> 367efab5f4e30ad15ecf78e438356655e3e5adec
             {
                 GameObject spawn = GameObject.Find("SpawnANav");
                 Vector3 spawnLocation = spawn.transform.position;
