@@ -8,7 +8,7 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    public float timeValue = 90;
+    public float timeValue = 100;
     public TMP_Text timeText;
 
     // Update is called once per frame
@@ -20,8 +20,6 @@ public class Timer : MonoBehaviour
         }
         else
         {
-            // Do something here when time runs out
-
             // Needed to stop it from showing as past 0
             timeValue = 0;
         }
