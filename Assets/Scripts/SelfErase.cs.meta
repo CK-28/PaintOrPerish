@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: cf5fb1b400d60dc45a3cecd91851954b
+guid: 147c2f9a4e9d7234782d977740630d95
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - splatterMark: {fileID: 5203820084034574566, guid: 0857a3e727ebf354ea496f6a91b0458c, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
