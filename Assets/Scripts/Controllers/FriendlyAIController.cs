@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-public class EnemyAIController : AIController
+// Handles retreating, collisions, start, and update for Teammate AIs (red team)
+public class FriendlyAIController : AIController
 {
     public GameObject TheGame;
     TheGame gameManager;
 
-    //private State currentState;
     private new Animation animation;
 
     private bool isControllable = true;
-
-    //private PlayerStatus playerStatus;
 
     private Vector3 moveDirection = new Vector3(0, 0, 0);
     private float movementSpeed = 2.5f;
@@ -23,6 +20,7 @@ public class EnemyAIController : AIController
 
     private Transform target;
 
+    // Called when dead, sends character back to spawn
     override
     public void goToSpawn()
     {
@@ -34,9 +32,8 @@ public class EnemyAIController : AIController
         controller.center = new Vector3(0, 1.15f, 0);
         collider.center = new Vector3(0, 1.15f, 0);
 
-        GameObject spawn = GameObject.Find("Spawn Point");
+        GameObject spawn = GameObject.Find("SpawnANav");
         Vector3 spawnLocation = spawn.transform.position;
-        mAnimator.SetTrigger("TriDead");
         if (!((controller.transform.position - spawnLocation).magnitude <= 1)) // character is not at spawn
         {
             navMeshAgent.speed = 5;
@@ -48,8 +45,8 @@ public class EnemyAIController : AIController
         }
         else
         {
-            mAnimator.SetTrigger("TriIdle");
-            mAnimator.ResetTrigger("TriDead");
+           mAnimator.SetTrigger("TriIdle");
+           mAnimator.ResetTrigger("TriDead");
 
             isDead = false;
             defendObjective.generateLocation();
@@ -57,6 +54,7 @@ public class EnemyAIController : AIController
         }
     }
 
+    // Called when collision detected
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "paintball" && !isDead) //collision is enemy paintball
@@ -64,8 +62,7 @@ public class EnemyAIController : AIController
             Debug.Log("Dead!");
             isDead = true;
 
-            gameManager.updateRedScore(1);
-            // mAnimator.SetTrigger("TriDead");
+            gameManager.updateBlueScore(1);
         }
     }
 
@@ -78,9 +75,7 @@ public class EnemyAIController : AIController
         defendObjective = GetComponent<TDMDefend>();
         roamObjective = GetComponent<TDMRoam>();
 
-        enemies = GameObject.FindGameObjectsWithTag("RedTeam");
-        Debug.Log("found " + enemies.Length + " enemies");
-
+        enemies = GameObject.FindGameObjectsWithTag("BlueTeam");
         TheGame = GameObject.Find("TheGame");
         gameManager = TheGame.GetComponent<TheGame>();
 
@@ -92,21 +87,13 @@ public class EnemyAIController : AIController
     // Update is called once per frame
     void Update()
     {
-        /*mAnimator.ResetTrigger("TriWalk");*/
         mAnimator.ResetTrigger("TriCrouch");
-        /*mAnimator.ResetTrigger("TriRun");
-        mAnimator.ResetTrigger("TriIdle");
-        mAnimator.ResetTrigger("TriArmRaise");
-        mAnimator.ResetTrigger("TriWalkArmRaise");*/
 
         if (!isControllable)
         {
             return;
         }
 
-        if(currentState != null)
-        {
-            currentState.Execute(this);
-        }
+        currentState.Execute(this);
     }
 }

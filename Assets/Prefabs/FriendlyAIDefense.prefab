@@ -2310,7 +2310,7 @@ GameObject:
   - component: {fileID: 3708049620402161903}
   - component: {fileID: 1188347070090814054}
   m_Layer: 0
-  m_Name: FriendlyAI
+  m_Name: FriendlyAIDefense
   m_TagString: RedTeam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2394,7 +2394,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2452,6 +2452,15 @@ MonoBehaviour:
   attackDistance: 5
   attackCooldown: 1
   navMeshAgent: {fileID: 0}
+  defendObjective: {fileID: 0}
+  roamObjective: {fileID: 0}
+  roamCooldown: 5
+  controller: {fileID: 0}
+  collider: {fileID: 0}
+  mAnimator: {fileID: 0}
+  gun: {fileID: 0}
+  shootAt: {fileID: 0}
+  TheGame: {fileID: 0}
 --- !u!114 &3708049620402161903
 MonoBehaviour:
   m_ObjectHideFlags: 0

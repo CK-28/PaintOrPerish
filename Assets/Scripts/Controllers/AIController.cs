@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 
+// Parent class for FriendlyAIController and EnemyAIController
+// Handles state machine behaviours
 public abstract class AIController : MonoBehaviour
 {
     public State currentState;
@@ -29,6 +31,7 @@ public abstract class AIController : MonoBehaviour
     public GameObject gun;
     public Transform shootAt;
 
+    // Abstract death function for use in state machine
     public abstract void goToSpawn();
 
     // Checking if character is dead
@@ -38,11 +41,13 @@ public abstract class AIController : MonoBehaviour
         set { isDead = value; }
     }
 
+    // Change state
     public void ChangeState(State newState)
     {
         currentState = newState;
     }
 
+    // Finds closest member of the enemy team to attack
     public int FindNearestEnemy()
     {
         AIController enemyController;
@@ -160,6 +165,8 @@ public abstract class AIController : MonoBehaviour
         return false;
     }
 
+
+    // Idles, called from state machine
     public void BeIdle()
     {
         mAnimator.SetTrigger("TriIdle");
@@ -167,14 +174,9 @@ public abstract class AIController : MonoBehaviour
         navMeshAgent.speed = 0;
     }
 
+    // Determines player objective behvaiour, called from state machine
     public void BeObjective()
     {
-        /*mAnimator.ResetTrigger("TriIdle");
-
-        mAnimator.ResetTrigger("TriDead");
-        mAnimator.ResetTrigger("TriArmRaise");
-        mAnimator.ResetTrigger("TriWalkArmRaise");*/
-
         if (myRole == Role.Defend)
         {
             navMeshAgent.speed = 8;
@@ -226,6 +228,7 @@ public abstract class AIController : MonoBehaviour
         }
     }
 
+    // Approach target, called from state machine
     public void BeApproaching()
     {
         mAnimator = GetComponent<Animator>();
@@ -242,6 +245,7 @@ public abstract class AIController : MonoBehaviour
         }
     }
 
+    // Faces and shoots at target, called from state machine
     public void BeShooting()
     {
         // stop moving
