@@ -96,4 +96,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 147c2f9a4e9d7234782d977740630d95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToErase: 5
+  timeToErase: 0.5
