@@ -20,6 +20,7 @@ TagManager:
   - GameOver
   - Crosshair
   - Winner
+  - gameStartText
   layers:
   - Default
   - TransparentFX
