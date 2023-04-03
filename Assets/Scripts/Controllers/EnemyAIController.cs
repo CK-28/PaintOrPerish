@@ -32,7 +32,7 @@ public class EnemyAIController : AIController
         controller.center = new Vector3(0, 1.15f, 0);
         collider.center = new Vector3(0, 1.15f, 0);
 
-        GameObject spawn = GameObject.Find("Spawn Point");
+        GameObject spawn = GameObject.Find("SpawnBNav");
         Vector3 spawnLocation = spawn.transform.position;
         mAnimator.SetTrigger("TriDead");
         if (!((controller.transform.position - spawnLocation).magnitude <= 1)) // character is not at spawn
