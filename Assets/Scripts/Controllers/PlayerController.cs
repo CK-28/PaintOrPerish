@@ -42,8 +42,7 @@ public class PlayerController : MonoBehaviour
         Animator mAnimator = GetComponent<Animator>();
 
         TheGame gameManager = TheGame.GetComponent<TheGame>();
-        if (gameManager.GameOver())
-        {
+        if (gameManager.GameOver()) {
             isControllable = false;
             Debug.Log("Game Over");
         }
@@ -94,8 +93,7 @@ public class PlayerController : MonoBehaviour
                 playerVelocity.y = yVelocity;
 
                 CollisionFlags flags = controller.Move(playerVelocity * Time.deltaTime * moveSpeed);
-            }
-            else if (isDead)
+            } else if (isDead)
             {
                 GameObject spawn = GameObject.Find("SpawnANav");
                 Vector3 spawnLocation = spawn.transform.position;
@@ -116,7 +114,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-
+        
     }
 
     // Called when collision detected
