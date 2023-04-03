@@ -14,8 +14,11 @@ public class Splat : MonoBehaviour
         Debug.DrawRay(gameObject.transform.position, forward, Color.green);
         if (Physics.Raycast(gameObject.transform.position, forward, out smt, 2f))
         {
-            painted = true;
-            Instantiate(splatterMark, smt.point+(smt.normal *0.1f), Quaternion.FromToRotation(Vector3.forward, smt.normal));
+            if (painted != true)
+            {
+                painted = true;
+                Instantiate(splatterMark, smt.point + (smt.normal * 0.1f), Quaternion.FromToRotation(Vector3.forward, smt.normal));
+            }
         }
     }
 
