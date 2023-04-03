@@ -9,12 +9,11 @@ public class StateIdle : State
 		var gameObject = GameObject.Find("TheGame");
 		TheGame gameScript = gameObject.GetComponent<TheGame>();
 
-		// If the game started, start plying objective
-		if (gameScript.isGameStarted())
+		if (gameScript.isGameStarted())					// If the game started, start plying objective
 		{
 			Debug.Log("Game is started. Going from Idle to playing objective");
 			character.ChangeState(new StateObjective());
-		} else if(character.IsDead)
+		} else if(character.IsDead)						// If shot, die
         {
 			Debug.Log("Dead. Going back to spawn");
 			character.ChangeState(new StateDie());

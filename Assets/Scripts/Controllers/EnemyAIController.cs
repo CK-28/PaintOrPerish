@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
+// Handles retreating, collisions, start, and update for Enemy AIs (blue team)
 public class EnemyAIController : AIController
 {
     public GameObject TheGame;
     TheGame gameManager;
 
-    //private State currentState;
     private new Animation animation;
 
     private bool isControllable = true;
-
-    //private PlayerStatus playerStatus;
 
     private Vector3 moveDirection = new Vector3(0, 0, 0);
     private float movementSpeed = 2.5f;
@@ -23,6 +20,7 @@ public class EnemyAIController : AIController
 
     private Transform target;
 
+    // Called when dead, sends character back to spawn
     override
     public void goToSpawn()
     {
@@ -49,6 +47,7 @@ public class EnemyAIController : AIController
         }
     }
 
+    // Called when collision detected
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "paintball" && !isDead) //collision is enemy paintball
@@ -57,7 +56,6 @@ public class EnemyAIController : AIController
             isDead = true;
 
             gameManager.updateRedScore(1);
-            // mAnimator.SetTrigger("TriDead");
         }
     }
 
@@ -83,12 +81,7 @@ public class EnemyAIController : AIController
     // Update is called once per frame
     void Update()
     {
-        /*mAnimator.ResetTrigger("TriWalk");*/
         mAnimator.ResetTrigger("TriCrouch");
-        /*mAnimator.ResetTrigger("TriRun");
-        mAnimator.ResetTrigger("TriIdle");
-        mAnimator.ResetTrigger("TriArmRaise");
-        mAnimator.ResetTrigger("TriWalkArmRaise");*/
 
         if (!isControllable)
         {

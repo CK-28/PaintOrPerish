@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+// Handles retreating, collisions, start, and update for Teammate AIs (red team)
 public class FriendlyAIController : AIController
 {
     public GameObject TheGame;
@@ -19,6 +20,7 @@ public class FriendlyAIController : AIController
 
     private Transform target;
 
+    // Called when dead, sends character back to spawn
     override
     public void goToSpawn()
     {
@@ -32,7 +34,6 @@ public class FriendlyAIController : AIController
             mAnimator.SetTrigger("TriDead");
             mAnimator.SetTrigger("TriArmRaise");
             mAnimator.SetTrigger("TriWalkArmRaise");
-            //mAnimator.ResetTrigger("TriDead");
         }
         else
         {
@@ -45,6 +46,7 @@ public class FriendlyAIController : AIController
         }
     }
 
+    // Called when collision detected
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "paintball" && !isDead) //collision is enemy paintball
@@ -53,8 +55,6 @@ public class FriendlyAIController : AIController
             isDead = true;
 
             gameManager.updateBlueScore(1);
-
-            // mAnimator.SetTrigger("TriDead");
         }
     }
 
@@ -78,16 +78,7 @@ public class FriendlyAIController : AIController
     // Update is called once per frame
     void Update()
     {
-        /*mAnimator.ResetTrigger("TriWalk");*/
         mAnimator.ResetTrigger("TriCrouch");
-        /*mAnimator.ResetTrigger("TriRun");
-        mAnimator.ResetTrigger("TriIdle");
-        mAnimator.ResetTrigger("TriArmRaise");*/
-
-        /*if (isDead)
-        {
-            mAnimator.SetTrigger("TriDead");
-        }*/
 
         if (!isControllable)
         {
