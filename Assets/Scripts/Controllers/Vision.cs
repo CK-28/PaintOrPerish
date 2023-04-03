@@ -2,30 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Handles AI raycasting vision
 public class Vision : MonoBehaviour
 {
-    // Start is called before the first frame update
-    //public Transform target;
     public float sightDistance = 20.0f;
     public float visionAngle = 160.0f;
     public int rayArrHor = 5;
     public int rayArrVert = 5;
     public float rayCastAngle = 60.0f;
-    public string enemyTag = "RedTeam";
+    public string enemyTag;
 
-    void Start()
-    {
-        //Debug.DrawRay(gameObject.transform.position, EnemySeen(), Color.red);
-        //print(EnemySeen());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Debug.DrawRay(gameObject.transform.position, EnemySeen(), Color.red);
-        //RayArrayHit(5, 5, 60.0f);
-    }
-
+    // Get angle to target
     float getAngle(Vector3 targetPos)
     {
         Vector3 inLocal = transform.InverseTransformPoint(targetPos);
@@ -34,6 +21,7 @@ public class Vision : MonoBehaviour
         return angle;
     }
 
+    // Detect if enemy seen; Returns vector to target
     public Vector3 EnemySeen(Transform target)
     {
         Vector3 toReturn = new Vector3(0.0f, 0.0f, 0.0f);
@@ -52,6 +40,7 @@ public class Vision : MonoBehaviour
         return toReturn;
     }
 
+    // Casts array of rays based on given arguements; returns vector of ray that hits
     public Vector3 RayArrayHit(int arrHorCount, int arrVertCount, float angle, Transform target)
     {
         Vector3 toReturn = new Vector3(0.0f,0.0f,0.0f);
@@ -67,22 +56,13 @@ public class Vision : MonoBehaviour
                 RaycastHit hit;
                 Vector3 castAttempt = Quaternion.AngleAxis(horAnglePart*i,Vector3.up)*start;
                 castAttempt = Quaternion.AngleAxis(horAnglePart*j, Vector3.right) * castAttempt;
-
-                Debug.DrawRay(transform.position + new Vector3(0, 2.2f, 0), castAttempt, Color.green, 15, false);
                 
                 bool hitsTarget = Physics.Raycast(transform.position + new Vector3(0, 2.2f, 0), castAttempt, out hit, sightDistance);
                 if (hitsTarget)
                 {
-                    Debug.DrawRay(transform.position + new Vector3(0, 2.2f, 0), castAttempt, Color.blue, 15, false);
-
                     if (hit.transform.gameObject.tag == enemyTag) // enemyTag is public. check the editor
                     {
-                        Debug.DrawRay(transform.position + new Vector3(0, 2.2f, 0), castAttempt, Color.red, 15, false);
                         return castAttempt;
-                    }
-                    else
-                    {
-                        //Debug.DrawRay(transform.position, castAttempt, Color.green, 15, false);
                     }
                 }
             }

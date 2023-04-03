@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
+// Handles all player behaviour
 public class PlayerController : MonoBehaviour
 {
     public GameObject TheGame, MainCamera;
@@ -50,9 +50,6 @@ public class PlayerController : MonoBehaviour
 
         if (isControllable)
         {
-            // Camera rotation using mouse input
-            //transform.Rotate(0, Input.GetAxis("Mouse X") * rotateSpeed, 0);
-
             // Movement using keyboard input
             playerVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             playerVelocity = transform.TransformDirection(playerVelocity);
@@ -120,6 +117,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    // Called when collision detected
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "paintball" && !isDead) //collision is paintball

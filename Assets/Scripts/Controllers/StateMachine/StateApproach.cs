@@ -11,7 +11,7 @@ public class StateApproach : State
 			Debug.Log("Going from PlayingObjective to Dying");
 			character.ChangeState(new StateDie());
 		}
-		else if (character.EnemySeen() && character.EnemyInRange())      //If see and in range, attack
+		else if (character.EnemySeen() && character.EnemyInRange())     //If see and in range, attack
 		{
 			Debug.Log("Going from PlayingObjective to Shooting");
 			character.ChangeState(new StateShoot());

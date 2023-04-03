@@ -7,6 +7,5 @@ public class Splat : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Destroy(this.gameObject);
-
     }
 }
