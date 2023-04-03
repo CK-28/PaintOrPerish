@@ -94,6 +94,38 @@ public class PlayerController : MonoBehaviour
 
                 CollisionFlags flags = controller.Move(playerVelocity * Time.deltaTime * moveSpeed);
             } else if (isDead)
+                moveSpeed = 5f;
+                // CharacterController and CapsuleCollider change size when crouching to account for smaller hitbox
+                controller.height = 1.6f;
+                collider.height = 1.6f;
+            }
+            if (Input.GetButtonUp("Crouch"))
+            {
+                moveSpeed = 8f;
+                controller.height = 2.2f;
+                collider.height = 2.2f;
+            }
+                // Set crouch speed and lower camera movement when control is clicked
+                if (Input.GetButtonDown("Crouch"))
+                {
+                    moveSpeed = 5f;
+                    // CharacterController and CapsuleCollider change size when crouching to account for smaller hitbox
+                    controller.height = 1.6f;
+                    collider.height = 1.6f;
+                }
+                if (Input.GetButtonUp("Crouch"))
+                {
+                    moveSpeed = 8f;
+                    controller.height = 2.2f;
+                    collider.height = 2.2f;
+                }
+
+                yVelocity += gravity * Time.deltaTime;
+
+                playerVelocity.y = yVelocity;
+
+                CollisionFlags flags = controller.Move(playerVelocity * Time.deltaTime * moveSpeed);
+            } else if (isDead)
             {
                 GameObject spawn = GameObject.Find("SpawnANav");
                 Vector3 spawnLocation = spawn.transform.position;
