@@ -16,7 +16,7 @@ public class TheGame : MonoBehaviour
     private int RedScore;
     private int BlueScore;
 
-    private const int SCORE_TO_WIN = 5;
+    private const int SCORE_TO_WIN = 10;
 
     //bool gameStarted = true;
 
@@ -89,7 +89,7 @@ public class TheGame : MonoBehaviour
 
     public bool isGameStarted ()
     {
-        if (timeScript.returnTimeLeft() < 80)
+        if (timeScript.returnTimeLeft() < 300)
         {
             gameStartText.SetActive(false);
             return true;

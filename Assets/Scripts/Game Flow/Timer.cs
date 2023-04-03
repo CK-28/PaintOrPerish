@@ -8,7 +8,7 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    public float timeValue = 100;
+    public float timeValue = 300;
     public TMP_Text timeText;
 
     // Update is called once per frame

@@ -2170,7 +2170,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.9
+  m_fontSize: 22.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4758,7 +4758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74fe7009e76b53c49b9c04a70f3dc9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeValue: 90
+  timeValue: 310
   timeText: {fileID: 184847599}
 --- !u!114 &184847599
 MonoBehaviour:
@@ -56262,7 +56262,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46.5
+  m_fontSize: 44.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
