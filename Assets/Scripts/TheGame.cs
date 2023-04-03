@@ -8,10 +8,11 @@ public class TheGame : MonoBehaviour
     GameObject timer;
     Timer timeScript;
 
-    GameObject gameOver, crosshair;
+    GameObject gameOver, crosshair, winner;
 
     public TMP_Text RedScoreText;
     public TMP_Text BlueScoreText;
+    public TMP_Text Winner;
     private int RedScore;
     private int BlueScore;
 
@@ -37,6 +38,10 @@ public class TheGame : MonoBehaviour
         // hide game over text
         gameOver = GameObject.FindGameObjectWithTag("GameOver");
         gameOver.SetActive(false);
+
+        // hide winner text
+        winner = GameObject.FindGameObjectWithTag("Winner");
+        winner.SetActive(false);
     }
 
     // checks for game end condition.  returns true if condition is met, false otherwise
@@ -60,6 +65,20 @@ public class TheGame : MonoBehaviour
         // show game over text and hide crosshair
         gameOver.SetActive(true);
         crosshair.SetActive(false);
+        winner.SetActive(true);
+
+        if (RedScore > BlueScore)
+        {
+            Winner.text = "YOU WIN!";
+        }
+        else if (RedScore == BlueScore)
+        {
+            Winner.text = "IT'S A TIE!";
+        }
+        else
+        {
+            Winner.text = "YOU LOSE!";
+        }
     }
 
     public bool isGameStarted ()

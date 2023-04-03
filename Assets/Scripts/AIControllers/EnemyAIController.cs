@@ -26,6 +26,14 @@ public class EnemyAIController : AIController
     override
     public void goToSpawn()
     {
+        // CharacterController and CapsuleCollider change size when crouching to account for smaller hitbox
+        controller.height = 2.2f;
+        collider.height = 2.2f;
+
+        // CharacterController and CapsuleCollider move when crouching to account for shorter character height
+        controller.center = new Vector3(0, 1.15f, 0);
+        collider.center = new Vector3(0, 1.15f, 0);
+
         GameObject spawn = GameObject.Find("Spawn Point");
         Vector3 spawnLocation = spawn.transform.position;
         mAnimator.SetTrigger("TriDead");
@@ -64,6 +72,7 @@ public class EnemyAIController : AIController
     // Use this for initialization
     void Start()
     {
+        collider = GetComponent<CapsuleCollider>();
         controller = GetComponent<CharacterController>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         defendObjective = GetComponent<TDMDefend>();

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject TheGame;
+    public GameObject TheGame, MainCamera;
     public CharacterController controller;
     public CapsuleCollider collider;
     public float rotateSpeed = 5f;
@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
         collider = GetComponent<CapsuleCollider>();
 
         TheGame = GameObject.Find("TheGame");
+        MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     // Update is called once per frame
@@ -44,7 +45,6 @@ public class PlayerController : MonoBehaviour
         TheGame gameManager = TheGame.GetComponent<TheGame>();
         if (gameManager.GameOver()) {
             isControllable = false;
-            Debug.Log("Game Over");
         }
 
 
@@ -100,6 +100,9 @@ public class PlayerController : MonoBehaviour
             Vector3 spawnLocation = spawn.transform.position;
             if (!((controller.transform.position - spawnLocation).magnitude <= 5)) // character is not at spawn
             {
+                // Zoom out camera to see whats happening
+                //MainCamera.transform.position = new Vector3(MainCamera.transform.position.x, MainCamera.transform.position.y, (MainCamera.transform.position.z - 2));
+
                 navMeshAgent.enabled = true;
                 navMeshAgent.destination = spawnLocation;
                 mAnimator.SetTrigger("TriWalkArmRaise");
