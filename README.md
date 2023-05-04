@@ -24,9 +24,14 @@ Paint or Perish is a paintball simulator we created while taking a course on Gam
 
 ## Game Features
 ### Level Design
+Our map was built to resemble a typical outdoor paintball arena, filled with different types of cover players can use to their advantage. There are also a number of buildings around the map, to allow for fun and strategic gameplay, and spawn points at either end of the arena, where each team will start.
 <img src="https://user-images.githubusercontent.com/59154699/235538138-8202b836-0da2-4ab5-aa39-a68688b8f3c5.png"  width="450" height="325"> <img src="https://user-images.githubusercontent.com/59154699/235538148-c647bacb-51b2-4d34-bfcb-f2dcd40672da.png"  width="450" height="325"> 
 ### Player Mechanics
+The player is controllable using typical first person shooter mechanics. This includes using WASD to move, mouse to aim, and left-click to shoot. Additionally, players can run using left shift and crouch using left control. The player has exactly one health, because in paintball you are out as soon as you are hit, and will automatically return to their spawn point once dead, playing a walking, hand-raising animation, to mimic returning to your own side in paintball. When the player reaches their spawn point, they will become controllable again and can continue playing.
 ### AI Mechanics
+There are two main categories of AI - enemy and teammate - which act pretty much the same except for their spawn location and who they shoot at. All AI then have one of two objectives (roles): defend or roam. Defending AI will randomly choose a location, from a predetermined list, to defend, meaning they go to the location and camp until they are killed. Roaming AI will choose one of three set paths to follow until they are killed. When any AI is hit, it will return to its spawn point, playing the walking, hand-raised animation. Once there, they will generate a new path or location and continue playing their objective. 
+
+The AI all use raycasting to determine if an enemy can be seen. If there is an enemy in sight, but not within attack range, they will approach until in range. Once in range, they will begin shooting. The AI traverses the map using a navigation mesh.
 ### Assets and Animation
 ### Other
 
