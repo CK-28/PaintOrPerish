@@ -33,6 +33,13 @@ There are two main categories of AI - enemy and teammate - which act pretty much
 
 The AI all use raycasting to determine if an enemy can be seen. If there is an enemy in sight, but not within attack range, they will approach until in range. Once in range, they will begin shooting. The AI traverses the map using a navigation mesh.
 ### Assets and Animation
+Most Game Objects are built using our very own assets. These assets have been created using Blender (version number here).
+
+The player model consists of a full bodied human with a custom classic paintball gun attached to their hand. Animations have also been created for this model. Animations include walking, running, crouching, crouch walking, and raising of the arm to signal being hit.
+
+The map is built by piecing together different building items such as walls, windows, doors, and stairs. We also created smaller objects to be used around the map for a variety of covers. These items are typical of an actual arena and include crates, tires and metal sheets.
+
+All textures have also been custom made with the exception of the grass and the stone texture used in both towers.
 ### Other
 
 ## Developer Roles
