@@ -1,12 +1,12 @@
 # Paint Or Perish 
 ### Table of Contents
-[Description](https://github.com/CK-28/PaintOrPerish/new/main?readme=1#description)
+[Description](https://github.com/CK-28/PaintOrPerish#description)
 
-[How To Run](https://github.com/CK-28/PaintOrPerish/new/main?readme=1#how-to-run)
+[How To Run](https://github.com/CK-28/PaintOrPerish#how-to-run)
 
-[Game Features](https://github.com/CK-28/PaintOrPerish/new/main?readme=1#game-features)
+[Game Features](https://github.com/CK-28/PaintOrPerish#game-features)
 
-[Developer Roles](https://github.com/CK-28/PaintOrPerish/new/main?readme=1#developer-roles)
+[Developer Roles](https://github.com/CK-28/PaintOrPerish#developer-roles)
 
 <img src="https://user-images.githubusercontent.com/59154699/235538800-d2db42f4-1b05-411b-bbbf-459ef794926e.png"  width="900" height="550">
 
@@ -45,6 +45,6 @@ All textures have also been custom made with the exception of the grass and the 
 ### Other
 
 ## Developer Roles
- - Crestena Khidhir (Team lead, Level design)
+ - Crestena Khidhir (Team lead, Level design, Additional programming)
  - Alanna Tees (Development lead, AI programmer)
  - Luca Alfieri (Animation and Assets lead, Additional programming)
