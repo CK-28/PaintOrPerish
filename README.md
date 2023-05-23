@@ -42,7 +42,8 @@ The player model consists of a full bodied human with a custom classic paintball
 The map is built by piecing together different building items such as walls, windows, doors, and stairs. We also created smaller objects to be used around the map for a variety of covers. These items are typical of an actual arena and include crates, tires and metal sheets.
 
 All textures have also been custom made with the exception of the grass and the stone texture used in both towers.
-### Other
+### Game Overview Video
+[![Watch the video](https://img.youtube.com/vi/pJUpNNwzNqc/maxresdefault.jpg)](https://youtu.be/pJUpNNwzNqc)
 
 ## Developer Roles
  - Crestena Khidhir (Team lead, Level design, Additional programming)
