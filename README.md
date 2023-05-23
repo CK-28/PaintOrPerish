@@ -35,7 +35,7 @@ There are two main categories of AI - enemy and teammate - which act pretty much
 
 The AI all use raycasting to determine if an enemy can be seen. If there is an enemy in sight, but not within attack range, they will approach until in range. Once in range, they will begin shooting. The AI traverses the map using a navigation mesh.
 ### Assets and Animation
-Most Game Objects are built using our very own assets. These assets have been created using Blender (version number here).
+Most Game Objects are built using our very own assets. These assets have been created using Blender 3.4.
 
 The player model consists of a full bodied human with a custom classic paintball gun attached to their hand. Animations have also been created for this model. Animations include walking, running, crouching, crouch walking, and raising of the arm to signal being hit.
 
