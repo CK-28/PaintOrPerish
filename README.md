@@ -34,6 +34,8 @@ The player is controllable using typical first person shooter mechanics. This in
 There are two main categories of AI - enemy and teammate - which act pretty much the same except for their spawn location and who they shoot at. All AI then have one of two objectives (roles): defend or roam. Defending AI will randomly choose a location, from a predetermined list, to defend, meaning they go to the location and camp until they are killed. Roaming AI will choose one of three set paths to follow until they are killed. When any AI is hit, it will return to its spawn point, playing the walking, hand-raised animation. Once there, they will generate a new path or location and continue playing their objective. 
 
 The AI all use raycasting to determine if an enemy can be seen. If there is an enemy in sight, but not within attack range, they will approach until in range. Once in range, they will begin shooting. The AI traverses the map using a navigation mesh.
+
+Collision detection is used to decide when a player has been hit. The object which the player model collided with is tested for being a paintball object.
 ### Assets and Animation
 Most Game Objects are built using our very own assets. These assets have been created using Blender 3.4.
 
