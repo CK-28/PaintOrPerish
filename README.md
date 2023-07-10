@@ -8,7 +8,7 @@
 
 [Developer Roles](https://github.com/CK-28/PaintOrPerish#developer-roles)
 
-<img src="https://user-images.githubusercontent.com/59154699/235538800-d2db42f4-1b05-411b-bbbf-459ef794926e.png"  width="900" height="550">
+![POP Main Menu](https://github.com/CK-28/PaintOrPerish/assets/59154699/3dbc1312-d15a-4295-93d9-5cd7f13314e6)
 
 ## Description
 Paint or Perish is a paintball simulator we created while taking a course on Game Programming at the University of Guelph. Gameplay consists of a team deathmatch where the player competes with and against teams of AI. This game mode is composed of two teams of five working towards winning the game by either reaching the highest score first or having the highest score when the timer runs out.
