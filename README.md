@@ -15,7 +15,8 @@ Paint or Perish is a paintball simulator we created while taking a course on Gam
 
 *Current Version Number: 1.3*
 
-<img src="https://user-images.githubusercontent.com/59154699/235540665-c52cd51a-36e2-4b90-af87-379ca862ba3d.png"  width="450" height="300"> <img src="https://user-images.githubusercontent.com/59154699/235540984-fa83b812-054b-45b0-aba5-38f255e9e286.png"  width="450" height="300"> 
+<img src="https://github.com/CK-28/PaintOrPerish/assets/59154699/846859f6-ba0b-4d5c-b98c-be2ed0cf5193"  width="450" height="300">
+<img src="https://github.com/CK-28/PaintOrPerish/assets/59154699/a801f6b4-7808-4bc1-81a1-f8e7eeaa8a68"  width="450" height="300"> 
 
 ## How To Run
 1. Download Unity version 2021.3.16f1
