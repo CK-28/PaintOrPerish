@@ -679,57 +679,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'This is a classic game of Paintball Team Deathmatch.
+  m_text: 'Crestena Khidhir
 
+    Alanna Tees
 
-
-    There are
-    two teams: Red (the team you are on) and Blue (the enemy team).
-
-
-    Each team
-    is made up of 5 members in total.
-
-
-
-    The goal is to win, obviously.
-
-    There
-    are two ways to win the game, reach the maximum score of 25 first OR have the
-    highest score when the timer runs out (5 minutes).
-
-
-
-    To gain points, simply
-    shoot the members of the enemy team. Each hit is worth 1 point.
-
-
-
-    When a
-    player is hit, they will be forced to raise their hand, announcing their death,
-    and walk back to spawn. Once they reach spawn they will be released back into
-    the game.
-
-
-
-    Keep in mind that friendly fire is on! There is a 10 second
-    cooldown before the game starts.
-
-
-
-    --Controls
-
-    WASD and camera to move
-    character and camera
-
-    Hold Left Shift to run
-
-    Hold Left Control to crouch
-
-    Click
-    Space to jump
-
-    Left mouse button to shoot'
+    Luca Alfieri'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -756,15 +710,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 17.55
+  m_fontSize: 50
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 10
-  m_fontSizeMax: 72
+  m_fontSizeMax: 50
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1074,7 +1028,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tutorial
+  m_text: Credits
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}

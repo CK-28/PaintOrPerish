@@ -10,10 +10,13 @@ EditorBuildSettings:
     guid: 60eb24080522646488a733460aa63366
   - enabled: 1
     path: Assets/Scenes/TutorialScene.unity
-    guid: b0defeee8c4062047b9743b73f652b93
+    guid: 099b90289df028a4ca0da665bfc07992
   - enabled: 1
     path: Assets/Scenes/TDMScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/CreditsScene.unity
+    guid: b0defeee8c4062047b9743b73f652b93
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
