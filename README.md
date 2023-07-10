@@ -13,7 +13,7 @@
 ## Description
 Paint or Perish is a paintball simulator we created while taking a course on Game Programming at the University of Guelph. Gameplay consists of a team deathmatch where the player competes with and against teams of AI. This game mode is composed of two teams of five working towards winning the game by either reaching the highest score first or having the highest score when the timer runs out.
 
-*Current Version Number: 1.2*
+*Current Version Number: 1.3*
 
 <img src="https://user-images.githubusercontent.com/59154699/235540665-c52cd51a-36e2-4b90-af87-379ca862ba3d.png"  width="450" height="300"> <img src="https://user-images.githubusercontent.com/59154699/235540984-fa83b812-054b-45b0-aba5-38f255e9e286.png"  width="450" height="300"> 
 
